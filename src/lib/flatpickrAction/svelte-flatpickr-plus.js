@@ -33,7 +33,8 @@ export const datepicker = async (node, options) => {
     const dispatch = createEventDispatcher();
     const modifyHooks = (opts = {}) => {
         opts = Object.assign({}, opts);
-
+        //? I need to set a dispatch to the array of hook that will support in flatpickr 
+        //? more info on array in hook here : https://flatpickr.js.org/events/#hooks
         for (const hook of hooks) {
             const eventFirer = (selectedDates, dateStr, instance) => {
                 dispatch(removeOn(hook), [selectedDates, dateStr, instance]);
