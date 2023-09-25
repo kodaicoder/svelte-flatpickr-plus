@@ -1,11 +1,6 @@
 <script>
 	// calling actions
-	import {
-		datePicker,
-		monthPicker,
-		dateRangePicker,
-		monthRangePicker
-	} from '$lib/actions';
+	import { datePicker, monthPicker, dateRangePicker, monthRangePicker } from '$lib';
 
 	const datepickerOptions = {
 		dateFormat: 'Z',

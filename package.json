@@ -40,10 +40,6 @@
 		".": {
 			"types": "./dist/index.d.ts",
 			"svelte": "./dist/index.js"
-		},
-		"./actions.js": {
-			"types": "./dist/actions.d.ts",
-			"svelte": "./dist/actions.js"
 		}
 	},
 	"files": [
