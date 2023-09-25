@@ -5,7 +5,7 @@
 		monthPicker,
 		dateRangePicker,
 		monthRangePicker
-	} from '$lib/svelte-flatpickr-plus';
+	} from '$lib/actions';
 
 	const datepickerOptions = {
 		dateFormat: 'Z',

@@ -1,6 +1,6 @@
 <script>
 	import { enhance } from '$app/forms';
-	import { monthPicker } from '$lib/svelte-flatpickr-plus.js';
+	import { monthPicker } from '$lib/actions.js';
 	import { Thai } from 'flatpickr_plus/dist/l10n/th.js';
 	let monthPickerElement, informMonthPickerElement, myForm;
 
@@ -30,7 +30,7 @@
 
 	const defaultDateRangeOptions = {
 		...monthPickerOptions,
-		defaultDate:'2023-07',
+		defaultDate: '2023-07',
 		resetToDefault: true
 	};
 
@@ -55,7 +55,6 @@
 	};
 </script>
 
-
 <h1>Month Picker</h1>
 
 <section>
@@ -64,7 +63,7 @@
 	<input name="normalMonthPicker" use:monthPicker={monthPickerOptions} on:change={handleChange} />
 </section>
 <br />
- <section>
+<section>
 	<label for="normalMonthPickerDefaultDate">Month Picker with initial date: </label>
 	<br />
 	<input name="normalMonthPickerDefaultDate" use:monthPicker={defaultDateRangeOptions} />

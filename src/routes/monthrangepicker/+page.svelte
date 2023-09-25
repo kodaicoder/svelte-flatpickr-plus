@@ -1,6 +1,6 @@
 <script>
 	import { enhance } from '$app/forms';
-	import { monthRangePicker } from '$lib/svelte-flatpickr-plus.js';
+	import { monthRangePicker } from '$lib/actions.js';
 	import { Thai } from 'flatpickr_plus/dist/l10n/th.js';
 	let monthRangePickerElement, informMonthRangePickerElement, myForm;
 
@@ -55,23 +55,28 @@
 	};
 </script>
 
-
 <h1>Month Range Picker</h1>
 
 <section>
 	<label for="normalMonthRangePicker">Month Range Picker: </label>
 	<br />
-	<input name="normalMonthRangePicker" use:monthRangePicker={monthRangePickerOptions} on:change={handleChange} />
+	<input
+		name="normalMonthRangePicker"
+		use:monthRangePicker={monthRangePickerOptions}
+		on:change={handleChange}
+	/>
 </section>
 <br />
- <section>
+<section>
 	<label for="normalMonthRangePickerDefaultDate">Month Range Picker with initial date: </label>
 	<br />
 	<input name="normalMonthRangePickerDefaultDate" use:monthRangePicker={defaultDateRangeOptions} />
 </section>
 <br />
 <section>
-	<label for="normalMonthRangePickerBind"> Month Range Picker with flatpickr element binding: </label>
+	<label for="normalMonthRangePickerBind">
+		Month Range Picker with flatpickr element binding:
+	</label>
 	<br />
 	<input
 		name="normalMonthRangePickerBind"

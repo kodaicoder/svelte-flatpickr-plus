@@ -1,6 +1,6 @@
 <script>
 	import { enhance } from '$app/forms';
-	import { dateRangePicker } from '$lib/svelte-flatpickr-plus.js';
+	import { dateRangePicker } from '$lib/actions.js';
 	import { Thai } from 'flatpickr_plus/dist/l10n/th.js';
 	let dateRangePickerElement, informDateRangePickerElement, myForm;
 
@@ -55,16 +55,19 @@
 	};
 </script>
 
-
 <h1>Date Range Picker</h1>
 
 <section>
 	<label for="normalDateRangePicker">Date Range Picker: </label>
 	<br />
-	<input name="normalDateRangePicker" use:dateRangePicker={dateRangePickerOptions} on:change={handleChange} />
+	<input
+		name="normalDateRangePicker"
+		use:dateRangePicker={dateRangePickerOptions}
+		on:change={handleChange}
+	/>
 </section>
 <br />
- <section>
+<section>
 	<label for="normalDateRangePickerDefaultDate">Date Range Picker with initial date: </label>
 	<br />
 	<input name="normalDateRangePickerDefaultDate" use:dateRangePicker={defaultDateRangeOptions} />
