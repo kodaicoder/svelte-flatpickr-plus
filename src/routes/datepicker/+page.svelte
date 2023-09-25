@@ -1,12 +1,8 @@
 <script>
 	import { enhance } from '$app/forms';
-	import { datepicker } from '$lib/flatpickrAction/svelte-flatpickr-plus.js';
+	import { datePicker } from '$lib/svelte-flatpickr-plus.js';
 	import { Thai } from 'flatpickr_plus/dist/l10n/th.js';
-	let datepickerElement, informDatepickerElement;
-
-	let normalDatepickerValue;
-
-	$: console.log('VALUE!! : ', normalDatepickerValue);
+	let datepickerElement, informDatepickerElement, myForm;
 
 	const datepickerOptions = {
 		dateFormat: 'Z',
@@ -18,6 +14,7 @@
 		minDate: '2019-03',
 		maxDate: '2033-12-31',
 		disable: ['2023-08-30', '2023-07-21', '2023-06-08', new Date(2023, 6, 8)],
+		resetMoveDefault: false,
 		onChange: (selectedDates, dateStr) => {
 			console.log('on change event!');
 			console.log(selectedDates[0]);
@@ -43,8 +40,10 @@
 	};
 
 	const handleChange = (event) => {
-		const [selectedDates, dateStr] = event.detail;
-		console.log('Fire From on:change!! ', { selectedDates, dateStr });
+		if (event.detail) {
+			const { selectedDates, dateStr, instance } = event.detail;
+			console.log('event change!!!', { selectedDates, dateStr, instance });
+		}
 	};
 
 	const handdleDatepickerBindClick = () => {
@@ -61,18 +60,13 @@
 <section>
 	<label for="normalDatepicker">Date picker: </label>
 	<br />
-	<input
-		name="normalDatepicker"
-		use:datepicker={datepickerOptions}
-		bind:value={normalDatepickerValue}
-		on:change={handleChange}
-	/>
+	<input name="normalDatepicker" use:datePicker={datepickerOptions} on:change={handleChange} />
 </section>
 <br />
 <section>
 	<label for="normalDatepickerDefaultDate">Date picker with initial date: </label>
 	<br />
-	<input name="normalDatepickerDefaultDate" use:datepicker={defaultDateOptions} />
+	<input name="normalDatepickerDefaultDate" use:datePicker={defaultDateOptions} />
 </section>
 <br />
 <section>
@@ -80,7 +74,7 @@
 	<br />
 	<input
 		name="normalDatepickerBind"
-		use:datepicker={datepickerOptions}
+		use:datePicker={datepickerOptions}
 		bind:this={datepickerElement}
 	/>
 	<button type="button" on:click={handdleDatepickerBindClick}>Clear</button>
@@ -89,7 +83,7 @@
 <section>
 	<label for="withWrapperDatepicker">Date picker with wrapper</label>
 	<br />
-	<div use:datepicker={wrapDatepickerOptions}>
+	<div use:datePicker={wrapDatepickerOptions}>
 		<input name="withWrapperDatepicker" data-input />
 		<button type="button" title="toggle" data-toggle> toggle </button>
 		<button type="button" title="clear" data-clear> clear </button>
@@ -102,13 +96,13 @@
 	<section>
 		<label for="datepicker1">Date picker: </label>
 		<br />
-		<input name="datepicker1" use:datepicker={datepickerOptions} />
+		<input name="datepicker1" use:datePicker={datepickerOptions} />
 	</section>
 	<br />
 	<section>
 		<label for="datepicker2">Date picker with initial date: </label>
 		<br />
-		<input name="datepicker2" use:datepicker={defaultDateOptions} />
+		<input name="datepicker2" use:datePicker={defaultDateOptions} />
 	</section>
 	<br />
 	<section>
@@ -116,7 +110,7 @@
 		<br />
 		<input
 			name="datepicker3"
-			use:datepicker={datepickerOptions}
+			use:datePicker={defaultDateOptions}
 			bind:this={informDatepickerElement}
 		/>
 		<button type="button" on:click={handdleDatepickerInfromBindClick}>Clear</button>
@@ -125,7 +119,7 @@
 	<section>
 		<label for="datepicker4">Date picker with wrapper</label>
 		<br />
-		<div use:datepicker={wrapDatepickerOptions}>
+		<div use:datePicker={wrapDatepickerOptions}>
 			<input name="datepicker4" data-input />
 			<button type="button" title="toggleInFrom" data-toggle> toggle </button>
 			<button type="button" title="clearInFrom" data-clear> clear </button>
