@@ -2,6 +2,29 @@
 	"name": "svelte-flatpickr-plus",
 	"version": "0.1.0",
 	"description": "Flatpickr is a lightweight and powerful datetime picker. Svelte Flatpickr Plus is a wrapper for Flatpickr with some extra features.",
+	"homepage": "https://github.com/kodaicoder/svelte-flatpickr-plus",
+	"bugs": {
+		"url": "https://github.com/kodaicoder/svelte-flatpickr-plus/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/kodaicoder/svelte-flatpickr-plus"
+	},
+	"keywords": [
+		"svelte",
+		"sveltekit",
+		"svelte action",
+		"datepicker",
+		"date  picker",
+		"monthpicker",
+		"month picker",
+		"daterangepicker",
+		"date range picker",
+		"monthrangepicker",
+		"month range picker"
+	],
+	"author": "kodaicoder <https://github.com/kodaicoder>",
+	"license": "MIT",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
