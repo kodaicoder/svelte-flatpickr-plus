@@ -1,58 +1,36 @@
-# create-svelte
+## flatpickr - javascript datetime picker
+[![npm version](https://badge.fury.io/js/svelte-flatpickr-plus.svg)](https://www.npmjs.com/package/svelte-flatpickr-plus)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=plastic)](https://raw.githubusercontent.com/flatpickr/flatpickr/master/LICENSE.md)
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+## Svelte Flatpickr Plus
+Flatpickr is a lightweight and powerful datetime picker. Svelte Flatpickr Plus is a wrapper for Flatpickr with some extra features.
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+### Feature overview:
 
-## Creating a project
+- all features of Flatpickr
+- Svelte Flatpickr Plus is just a svelte actions that you can using with use:action directive of svelte on input element with any class or style
+- You can using your locale years (e.g. Buddhist Era) with `useLocaleYear` option.
+- You can setting a reset behavior with `resetMoveDefault` and `resetToDefault` option.
+- On a calendar, year input has been replace with year dropdown element for easy to select year.
+- Have theme changer plugin to calling and change a theme of calendar while theme has been changed.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Actions
+Svelte Flatpickr Plus coming with 4 actions
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+- datePicker
+- monthPicker
+- dateRangePicker
+- monthRangePicker
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
 
-## Developing
+## Compatibility
+IE9 and up, Edge, iOS Safari 6+, Chrome 8+, Firefox 6+
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-```bash
-npm run dev
+## Supporting main project - flatpickr
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+flatpickr will never change its license, pester users for donations, or engage in other user-hostile behavior.
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+Nevertheless, if you enjoyed working with this library or if its made your life easier, you can buy them a cup of coffee :)
 
-## Building
-
-To build your library:
-
-```bash
-npm run package
-```
-
-To create a production version of your showcase app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```bash
-npm publish
-```
+[❤️ Go here ](https://github.com/flatpickr/flatpickr/tree/master)
