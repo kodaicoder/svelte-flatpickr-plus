@@ -1,11 +1,11 @@
 ## flatpickr - javascript datetime picker
-[![npm version](https://badge.fury.io/js/flatpickr.svg)](https://www.npmjs.com/package/svelte-flatpickr-plus)
+[![npm version](https://badge.fury.io/js/svelte-flatpickr-plus.svg)](https://www.npmjs.com/package/svelte-flatpickr-plus)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=plastic)](https://raw.githubusercontent.com/flatpickr/flatpickr/master/LICENSE.md)
 
 ## Svelte Flatpickr Plus
 Flatpickr is a lightweight and powerful datetime picker. Svelte Flatpickr Plus is a wrapper for Flatpickr with some extra features.
 
-Feature overview:
+### Feature overview:
 
 - all features of Flatpickr
 - Svelte Flatpickr Plus is just a svelte actions that you can using with use:action directive of svelte on input element with any class or style
@@ -33,4 +33,4 @@ flatpickr will never change its license, pester users for donations, or engage i
 
 Nevertheless, if you enjoyed working with this library or if its made your life easier, you can buy them a cup of coffee :)
 
-<a href='https://ko-fi.com/A3381DJ9' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi4.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+[❤️ Go here ](https://github.com/flatpickr/flatpickr/tree/master)
