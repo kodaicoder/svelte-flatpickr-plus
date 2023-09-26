@@ -131,10 +131,10 @@
 <h2>Actions</h2>
 <p>Svelte Flatpickr Plus coming with 4 actions</p>
 <ul>
-	<li>datePicker</li>
-	<li>monthPicker</li>
-	<li>dateRangePicker</li>
-	<li>monthRangePicker</li>
+	<li><a href="/datepicker">datePicker</a></li>
+	<li><a href="/monthpicker">monthPicker</a></li>
+	<li><a href="/daterangepicker">dateRangePicker</a></li>
+	<li><a href="/monthrangepicker">monthRangePicker</a></li>
 </ul>
 <h3>
 	Date Picker

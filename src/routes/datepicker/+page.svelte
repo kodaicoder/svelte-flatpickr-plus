@@ -55,6 +55,7 @@
 	};
 </script>
 
+<a href="/">« Back</a>
 <h1>Datepicker</h1>
 
 <section>
