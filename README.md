@@ -22,10 +22,10 @@ Flatpickr is a lightweight and powerful datetime picker. Svelte Flatpickr Plus i
 
 Svelte Flatpickr Plus coming with 4 actions
 
-- datePicker
-- monthPicker
-- dateRangePicker
-- monthRangePicker
+- [datePicker](https://svelte-flatpickr-plus.vercel.app/datepicker)
+- [monthPicker](https://svelte-flatpickr-plus.vercel.app/monthpicker)
+- [dateRangePicker](https://svelte-flatpickr-plus.vercel.app/daterangepicker)
+- [monthRangePicker](https://svelte-flatpickr-plus.vercel.app/monthrangepicker)
 
 ## Installation
 
@@ -43,24 +43,24 @@ example for build date picker element
 
 ```
 <script>
-	//? import svelte action from
-	import { datePicker } from 'svelte-flatpickr-plus';
+    //? import svelte action from
+    import { datePicker } from 'svelte-flatpickr-plus';
 
-	//? decalre any options you want to set in flatpickr
-	const options = {
-			dateFormat: 'Z',
-			altFormat: 'd F Y',
-			altInput: true
-	    };
+    //? decalre any options you want to set in flatpickr
+    const options = {
+            dateFormat: 'Z',
+            altFormat: 'd F Y',
+            altInput: true
+          };
 </script>
 
 //? using svelte action with html input element and set `options` to it
     <input
-		name="input_datepicker"
-		use:datePicker={options}
-		placeholder="please select date"
-		readonly
-	/>
+        name="input_datepicker"
+        use:datePicker={options}
+        placeholder="please select date"
+        readonly
+    />
 ```
 
 [demo repl for datePicker action](https://www.sveltelab.dev/t4zx1p7v6mcp3yj?files=.%2Fsrc%2Froutes%2F%2Bpage.svelte)
