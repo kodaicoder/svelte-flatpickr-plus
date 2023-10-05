@@ -37,27 +37,24 @@ or
 
 ## Usage
 
-### datePicker
+you can import any actions and passing options to that actions that all you need to do
 
-import svelte action from
-
-```
-import { datePicker } from 'svelte-flatpickr-plus';
-```
-
-decalre any options you want to set in flatpickr
+example for build date picker element
 
 ```
-const options = {
-		dateFormat: 'Z',
-		altFormat: 'd F Y',
-		altInput: true
-    };
-```
+<script>
+	//? import svelte action from
+	import { datePicker } from 'svelte-flatpickr-plus';
 
-using svelte action with html input element and set `options` to it
+	//? decalre any options you want to set in flatpickr
+	const options = {
+			dateFormat: 'Z',
+			altFormat: 'd F Y',
+			altInput: true
+	    };
+</script>
 
-```
+//? using svelte action with html input element and set `options` to it
     <input
 		name="input_datepicker"
 		use:datePicker={options}
@@ -66,7 +63,7 @@ using svelte action with html input element and set `options` to it
 	/>
 ```
 
-demo repl for datePicker action
+[demo repl for datePicker action](https://www.sveltelab.dev/t4zx1p7v6mcp3yj?files=.%2Fsrc%2Froutes%2F%2Bpage.svelte)
 
 ## Compatibility
 
