@@ -27,6 +27,47 @@ Svelte Flatpickr Plus coming with 4 actions
 - dateRangePicker
 - monthRangePicker
 
+## Installation
+
+`npm i svelte-flatpickr-plus`
+
+or
+
+`pnpm i svelte-flatpickr-plus`
+
+## Usage
+
+### datePicker
+
+import svelte action from
+
+```
+import { datePicker } from 'svelte-flatpickr-plus';
+```
+
+decalre any options you want to set in flatpickr
+
+```
+const options = {
+		dateFormat: 'Z',
+		altFormat: 'd F Y',
+		altInput: true
+    };
+```
+
+using svelte action with html input element and set `options` to it
+
+```
+    <input
+		name="input_datepicker"
+		use:datePicker={options}
+		placeholder="please select date"
+		readonly
+	/>
+```
+
+demo repl for datePicker action
+
 ## Compatibility
 
 IE9 and up, Edge, iOS Safari 6+, Chrome 8+, Firefox 6+
