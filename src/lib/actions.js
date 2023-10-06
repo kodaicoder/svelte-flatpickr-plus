@@ -213,7 +213,7 @@ export const datePicker = async (node, options) => {
 }
 /** @type {import('svelte/action').Action<HTMLInputElement, Options>}  */
 export const monthPicker = async (node, options) => {
-
+    options = { ...defaultOptions, ...options };
     const opts = modifyHooks(options, node);
 
     const monthPlugins =
@@ -238,8 +238,7 @@ export const monthPicker = async (node, options) => {
 }
 /** @type {import('svelte/action').Action<HTMLInputElement, Options>}  */
 export const dateRangePicker = async (node, options) => {
-    options = { ...options, mode: 'range' }
-
+    options = { ...defaultOptions, ...options, mode: 'range' };
     const opts = modifyHooks(options, node);
 
     const datepickerRangeInstance = attachFlatpickr(node, opts);
@@ -253,7 +252,7 @@ export const dateRangePicker = async (node, options) => {
 }
 /** @type {import('svelte/action').Action<HTMLInputElement, Options>}  */
 export const monthRangePicker = async (node, options) => {
-    options = { ...options, mode: 'range' }
+    options = { ...defaultOptions, ...options, mode: 'range' };
     const opts = modifyHooks(options, node);
 
     const monthRangePlugins =
