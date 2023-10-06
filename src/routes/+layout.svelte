@@ -1,4 +1,5 @@
 <script>
+	import '../app.css';
 	import { onMount } from 'svelte';
 	import fpThemeChanger from 'flatpickr_plus/dist/plugins/themeChanger';
 

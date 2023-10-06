@@ -1,0 +1,26 @@
+h3 {
+	margin: 10px 0;
+}
+
+.element-block {
+	margin: 0 10px;
+}
+
+.element-block div {
+	display: flex;
+	align-items: center;
+	height: 28px;
+}
+
+code.code-show-block {
+	padding: 5px;
+	border-radius: 5px;
+	border: 1px solid #999999;
+}
+.copy-button {
+	height: 28px;
+}
+
+hr {
+	margin: 30px 0 10px 0;
+}

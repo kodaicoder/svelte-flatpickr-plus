@@ -1,4 +1,5 @@
 <script>
+	import CodeShowBlock from '../components/CodeShowBlock.svelte';
 	// calling actions
 	import { datePicker, monthPicker, dateRangePicker, monthRangePicker } from '$lib';
 
@@ -136,39 +137,53 @@
 	<li><a href="/daterangepicker">dateRangePicker</a></li>
 	<li><a href="/monthrangepicker">monthRangePicker</a></li>
 </ul>
-<h3>
-	Date Picker
-	<input
-		name="input_datepicker"
-		use:datePicker={datepickerOptions}
-		placeholder="please select date"
-		readonly
+<br />
+<h2>Basic Usage</h2>
+<div style="display: flex; gap: 1rem;">
+	<div class="element-block">
+		<h3>Date Picker</h3>
+		<div>
+			<input use:datePicker placeholder="please select date" readonly />
+		</div>
+	</div>
+
+	<CodeShowBlock code={`<input use:datePicker placeholder="please select date" readonly />`} />
+</div>
+<hr />
+<div style="display: flex; gap: 1rem;">
+	<div class="element-block">
+		<h3>Month Picker</h3>
+		<div>
+			<input use:monthPicker placeholder="please select month" readonly />
+		</div>
+	</div>
+
+	<CodeShowBlock code={`<input use:monthPicker placeholder="please select month" readonly />`} />
+</div>
+<hr />
+<div style="display: flex; gap: 1rem;">
+	<div class="element-block">
+		<h3>Date Range Picker</h3>
+		<div>
+			<input use:dateRangePicker placeholder="please select date range" readonly />
+		</div>
+	</div>
+
+	<CodeShowBlock
+		code={`<input use:dateRangePicker placeholder="please select date range" readonly />`}
 	/>
-</h3>
-<h3>
-	Month Picker
-	<input
-		name="input_monthpicker"
-		use:monthPicker={monthPickerOptions}
-		placeholder="please select month"
-		readonly
+</div>
+<hr />
+<div style="display: flex; gap: 1rem;">
+	<div class="element-block">
+		<h3>Month Range Picker</h3>
+		<div>
+			<input use:monthRangePicker placeholder="please select month range" readonly />
+		</div>
+	</div>
+
+	<CodeShowBlock
+		code={`<input use:monthRangePicker placeholder="please select month range" readonly />`}
 	/>
-</h3>
-<h3>
-	Date Range datePicker
-	<input
-		name="input_daterangepicker"
-		use:dateRangePicker={dateRangePickerOptions}
-		placeholder="please select date range"
-		readonly
-	/>
-</h3>
-<h3>
-	Month Range Picker
-	<input
-		name="input_monthrangepicker"
-		use:monthRangePicker={monthRangePickerOptions}
-		placeholder="please select month range"
-		readonly
-	/>
-</h3>
+</div>
+<hr />
