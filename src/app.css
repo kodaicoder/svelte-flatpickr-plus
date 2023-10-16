@@ -92,3 +92,9 @@ tr:hover {
 pre {
 	white-space: break-spaces;
 }
+
+form {
+	padding: 1rem;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
