@@ -1,3 +1,8 @@
+html,
+body {
+	scroll-behavior: smooth;
+}
+
 h3 {
 	margin: 10px 0;
 }
@@ -23,4 +28,38 @@ code.code-show-block {
 
 hr {
 	margin: 30px 0 10px 0;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+thead {
+	background-color: #f2f2f2;
+}
+
+th,
+td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+}
+
+th {
+	font-weight: bold;
+	text-align: center;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+tr:hover {
+	background-color: #ddd;
+}
+
+.permalink {
+	text-decoration: none;
+	font-size: 18px;
 }
