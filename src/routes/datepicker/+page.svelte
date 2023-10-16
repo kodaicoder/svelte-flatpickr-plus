@@ -97,6 +97,7 @@
 	<section>
 		<div>
 			<h4 for="normalDatepicker">Normal Date picker</h4>
+			<a href="#normaldatepicker" class="permalink">🔗</a>
 			<input name="normalDatepicker" use:datePicker={dateOptions} readonly />
 		</div>
 		<details>
@@ -121,6 +122,7 @@
 	<br />
 	<section>
 		<h4 for="datepickerDefaultDate">Date picker with initial date:</h4>
+		<a href="#initaildatepicker" class="permalink">🔗</a>
 		<input name="datepickerDefaultDate" use:datePicker={defaultDateOptions} readonly />
 		<details>
 			<summary>How to ?</summary>
@@ -146,6 +148,7 @@
 	<br />
 	<section>
 		<h4 for="datepickerMinMaxDate">Date picker with min/max date:</h4>
+		<a href="#minmaxdatepicker" class="permalink">🔗</a>
 		<input name="datepickerMinMaxDate" use:datePicker={minMaxDateOptions} readonly />
 		<details>
 			<summary>How to ?</summary>
@@ -176,6 +179,7 @@
 	<br />
 	<section>
 		<h4 for="datepickerHookDate">Date picker with hook options:</h4>
+		<a href="#hookdatepicker" class="permalink">🔗</a>
 		<input name="datepickerHookDate" use:datePicker={hookDateOptions} readonly />
 		<details>
 			<summary>How to ?</summary>
@@ -211,6 +215,7 @@
 	<br />
 	<section>
 		<h4 for="datepickerOnDirectiveDate">Date picker with `on` directive:</h4>
+		<a href="#eventdatepicker" class="permalink">🔗</a>
 		<input
 			name="datepickerOnDirectiveDate"
 			use:datePicker={dateOptions}
@@ -270,6 +275,7 @@ const closeHandler = (event) => {
 	<br />
 	<section>
 		<h4 for="normalDatepickerBind">Date picker with flatpickr element binding:</h4>
+		<a href="#binddatepicker" class="permalink">🔗</a>
 		<input name="normalDatepickerBind" use:datePicker={dateOptions} bind:this={datepickerElement} />
 		<button type="button" on:click={handdleDatepickerBindClick}>Clear</button>
 		<details>
