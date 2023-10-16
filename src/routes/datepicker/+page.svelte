@@ -38,7 +38,7 @@
 
 	const defaultDateOptions = {
 		...dateOptions,
-		defaultDate: '2023-12-30',
+		defaultDate: '2023-05-25',
 		resetToDefault: true
 	};
 
@@ -67,11 +67,19 @@
 		wrap: true
 	};
 
-	const handleChange = (event) => {
+	const changeHandler = (event) => {
 		if (event.detail) {
 			const { selectedDates, dateStr, instance } = event.detail;
-			console.log('event change!!!', { selectedDates, dateStr, instance });
+			console.log('event change!', { selectedDates, dateStr, instance });
 		}
+	};
+
+	const openHandler = (event) => {
+		console.log('event open!');
+	};
+
+	const closeHandler = (event) => {
+		console.log('event close!');
 	};
 
 	const handdleDatepickerBindClick = () => {
@@ -173,7 +181,7 @@
 			<summary>How to ?</summary>
 			<p>
 				in this example is using only `onChange`, `onOpen` and `onClose` but you can adding any
-				flatpickr hook to the options
+				flatpickr hook to the options. (you can open console to see the hook is working)
 			</p>
 			<div style="display:flex;gap:1rem;flex-wrap: wrap;">
 				<CodeShowBlock
@@ -196,6 +204,65 @@
 
 				<CodeShowBlock
 					code={`	<input name="datepickerHookDate" use:datePicker={hookDateOptions} readonly />`}
+				/>
+			</div>
+		</details>
+	</section>
+	<br />
+	<section>
+		<h4 for="datepickerOnDirectiveDate">Date picker with `on` directive:</h4>
+		<input
+			name="datepickerOnDirectiveDate"
+			use:datePicker={dateOptions}
+			on:change={changeHandler}
+			on:open={openHandler}
+			on:close={closeHandler}
+			readonly
+		/>
+		<details>
+			<summary>How to ?</summary>
+			<p>
+				also like a datepicker with hook you can using svelte's `on` directive with a name of hook
+				too.
+			</p>
+			<p>
+				you can access to a data of hook by using `event.detail` (you can open console to see the
+				event is working)
+			</p>
+			<div style="display:flex;gap:1rem;flex-wrap: wrap;">
+				<CodeShowBlock
+					title="Options"
+					code={`const dateOptions = {
+	dateFormat: 'Z',
+	altFormat: 'd F Y',
+	altInput: true,
+	ariaDateFormat: 'd F Y'
+};`}
+				/>
+				<CodeShowBlock
+					title="Script"
+					code={`const changeHandler = (event) => {
+	if (event.detail) {
+		const { selectedDates, dateStr, instance } = event.detail;
+		console.log('event change!', { selectedDates, dateStr, instance });
+	}
+};
+const openHandler = (event) => {
+	console.log('event open!');
+};
+const closeHandler = (event) => {
+	console.log('event close!');
+};`}
+				/>
+
+				<CodeShowBlock
+					code={`<input name="datepickerOnDirectiveDate" 
+	use:datePicker={dateOptions} 
+	on:change={changeHandler} 
+	on:open={openHandler} 
+	on:close={closeHandler} 
+	readonly 
+/>`}
 				/>
 			</div>
 		</details>
