@@ -17,12 +17,13 @@ h3 {
 	height: 28px;
 }
 
-code.code-show-block {
+.code-show-block {
 	padding: 5px;
 	border-radius: 5px;
 	border: 1px solid #999999;
 }
 .copy-button {
+	margin: 0 1rem;
 	height: 28px;
 }
 
@@ -36,7 +37,10 @@ table {
 }
 
 thead {
-	background-color: #f2f2f2;
+	background-color: #303030;
+	position: sticky;
+	top: 0;
+	border: 1px solid #ddd;
 }
 
 th,
@@ -49,6 +53,7 @@ td {
 th {
 	font-weight: bold;
 	text-align: center;
+	color: whitesmoke;
 }
 
 tr:nth-child(even) {
@@ -62,4 +67,28 @@ tr:hover {
 .permalink {
 	text-decoration: none;
 	font-size: 18px;
+}
+
+.details section {
+	gap: 1rem;
+	padding: 1rem;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+.details h4 {
+	margin: 0.5rem 0;
+	padding: 0;
+}
+.details section details {
+	cursor: pointer;
+	padding-top: 1rem;
+}
+
+.details section summary {
+	font-weight: bold;
+}
+
+pre {
+	white-space: break-spaces;
 }

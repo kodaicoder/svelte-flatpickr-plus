@@ -35,7 +35,7 @@ or
 
 `pnpm i svelte-flatpickr-plus`
 
-## Usage
+## Basic Usage
 
 you can import any actions and passing options to that actions that all you need to do
 

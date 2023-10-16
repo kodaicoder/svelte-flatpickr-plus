@@ -91,7 +91,6 @@ import 'flatpickr_plus/dist/plugins/monthSelect/style.css';
  * @property {Element} [positionElement] - The element off of which the calendar will be positioned. Defaults to the date input.
  * @property {string} [prevArrow] - HTML for the left arrow icon, used to switch months.
  * @property {boolean} [shorthandCurrentMonth] - Whether to display the current month name in shorthand mode, e.g., "Sep" instead of "September".
- * @property {boolean} [shorthand] - Whether to display months name in shorthand mode, e.g., "Sep" instead of "September".
  * @property {boolean} [static] - Creates a wrapper to position the calendar. Use this if the input is inside a scrollable element.
  * @property {number} [showMonths] - Sets the number of months to show.
  * @property {boolean} [time_24hr] - Displays time picker in 24-hour mode without AM/PM selection when enabled.
@@ -108,7 +107,7 @@ const defaultOptions = {
     allowInvalidPreload: false,
     altFormat: "F j, Y",
     altInput: false,
-    altInputClass: null,
+    altInputClass: "",
     ariaDateFormat: "F j, Y",
     autoFillDefaultTime: true,
     clickOpens: true,
@@ -119,24 +118,36 @@ const defaultOptions = {
     defaultMinute: 0,
     defaultSeconds: 0,
     disable: [],
-    disableMobile: true,
-    enable: [],
+    disableMobile: false,
     enableSeconds: false,
     enableTime: false,
+    hourIncrement: 1,
     ignoredFocusElements: [],
     inline: false,
     locale: "default",
-    maxDate: null,
-    mindate: null,
-    maxTime: null,
-    minTime: null,
     minuteIncrement: 5,
     mode: "single",
     monthSelectorType: "dropdown",
     noCalendar: false,
+    now: new Date(),
+    onChange: [],
+    onClose: [],
+    onDayCreate: [],
+    onDestroy: [],
+    onKeyDown: [],
+    onMonthChange: [],
+    onOpen: [],
+    onParseConfig: [],
+    onReady: [],
+    onValueUpdate: [],
+    onYearChange: [],
+    onPreCalendarPosition: [],
+    plugins: [],
     position: "auto",
     positionElement: undefined,
     shorthandCurrentMonth: false,
+    shorthand: false,
+    showMonths: 1,
     static: false,
     time_24hr: false,
     weekNumbers: false,
@@ -144,7 +155,8 @@ const defaultOptions = {
     useLocaleYear: false,
     resetMoveDefault: true,
     resetToDefault: true,
-}
+};
+
 /** @type {HookKey[]} */
 const hooks = [
     'onChange',
@@ -245,6 +257,7 @@ export const monthPicker = async (node, options) => {
 }
 /** @type {import('svelte/action').Action<HTMLInputElement, Options>}  */
 export const dateRangePicker = async (node, options) => {
+    //...defaultOptions,
     options = { ...defaultOptions, ...options, mode: 'range' };
     const opts = modifyHooks(options, node);
 
@@ -259,6 +272,7 @@ export const dateRangePicker = async (node, options) => {
 }
 /** @type {import('svelte/action').Action<HTMLInputElement, Options>}  */
 export const monthRangePicker = async (node, options) => {
+    // ...defaultOptions,
     options = { ...defaultOptions, ...options, mode: 'range' };
     const opts = modifyHooks(options, node);
 
