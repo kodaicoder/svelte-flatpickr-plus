@@ -91,6 +91,7 @@ import 'flatpickr_plus/dist/plugins/monthSelect/style.css';
  * @property {Element} [positionElement] - The element off of which the calendar will be positioned. Defaults to the date input.
  * @property {string} [prevArrow] - HTML for the left arrow icon, used to switch months.
  * @property {boolean} [shorthandCurrentMonth] - Whether to display the current month name in shorthand mode, e.g., "Sep" instead of "September".
+ * @property {boolean} [shorthand] - Whether to display months name in shorthand mode, e.g., "Sep" instead of "September".
  * @property {boolean} [static] - Creates a wrapper to position the calendar. Use this if the input is inside a scrollable element.
  * @property {number} [showMonths] - Sets the number of months to show.
  * @property {boolean} [time_24hr] - Displays time picker in 24-hour mode without AM/PM selection when enabled.
