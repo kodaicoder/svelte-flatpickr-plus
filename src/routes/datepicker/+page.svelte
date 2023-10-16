@@ -96,7 +96,7 @@
 <div class="details">
 	<section>
 		<div>
-			<h4 for="normalDatepicker">
+			<h4 id="normaldatepicker" for="normalDatepicker">
 				Normal Date picker<a href="#normaldatepicker" class="permalink">🔗</a>
 			</h4>
 
@@ -123,7 +123,7 @@
 	</section>
 	<br />
 	<section>
-		<h4 for="datepickerDefaultDate">
+		<h4 id="initaildatepicker" for="datepickerDefaultDate">
 			Date picker with initial date<a href="#initaildatepicker" class="permalink">🔗</a>
 		</h4>
 
@@ -151,7 +151,7 @@
 	</section>
 	<br />
 	<section>
-		<h4 for="datepickerMinMaxDate">
+		<h4 id="minmaxdatepicker" for="datepickerMinMaxDate">
 			Date picker with min/max date<a href="#minmaxdatepicker" class="permalink">🔗</a>
 		</h4>
 
@@ -184,7 +184,7 @@
 	</section>
 	<br />
 	<section>
-		<h4 for="datepickerHookDate">
+		<h4 id="hookdatepicker" for="datepickerHookDate">
 			Date picker with hook options <a href="#hookdatepicker" class="permalink">🔗</a>
 		</h4>
 
@@ -222,7 +222,7 @@
 	</section>
 	<br />
 	<section>
-		<h4 for="datepickerOnDirectiveDate">
+		<h4 id="eventdatepicker" for="datepickerOnDirectiveDate">
 			Date picker with `on` directive<a href="#eventdatepicker" class="permalink">🔗</a>
 		</h4>
 
@@ -284,7 +284,7 @@ const closeHandler = (event) => {
 	</section>
 	<br />
 	<section>
-		<h4 for="normalDatepickerBind">
+		<h4 id="binddatepicker" for="normalDatepickerBind">
 			Date picker with flatpickr element binding<a href="#binddatepicker" class="permalink">🔗</a>
 		</h4>
 
