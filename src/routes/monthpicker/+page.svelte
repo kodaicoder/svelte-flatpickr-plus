@@ -28,6 +28,13 @@
 		}
 	};
 
+	const monthOptions = {
+		dateFormat: 'Z',
+		altFormat: 'F Y',
+		altInput: true,
+		ariaDateFormat: 'F Y'
+	};
+
 	const defaultDateRangeOptions = {
 		...monthPickerOptions,
 		defaultDate: '2023-07',

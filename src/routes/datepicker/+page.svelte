@@ -5,30 +5,6 @@
 	import { Thai } from 'flatpickr_plus/dist/l10n/th.js';
 	let datepickerElement, informDatepickerElement, myForm;
 
-	const datepickerOptions = {
-		dateFormat: 'Z',
-		altFormat: 'd F Y',
-		altInput: true,
-		ariaDateFormat: 'd F Y',
-		useLocaleYear: true,
-		locale: Thai,
-		minDate: '2019-03',
-		maxDate: '2033-12-31',
-		disable: ['2023-08-30', '2023-07-21', '2023-06-08', new Date(2023, 6, 8)],
-		resetMoveDefault: false,
-		onChange: (selectedDates, dateStr) => {
-			console.log('on change event!');
-			console.log(selectedDates[0]);
-			console.log(dateStr);
-		},
-		onOpen: (selectedDates, dateStr) => {
-			console.log('on open event!');
-		},
-		onClose: (selectedDates, dateStr) => {
-			console.log('on close event!');
-		}
-	};
-
 	const dateOptions = {
 		dateFormat: 'Z',
 		altFormat: 'd F Y',
