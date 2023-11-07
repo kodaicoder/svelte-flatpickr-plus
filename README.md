@@ -35,7 +35,7 @@ or
 
 `pnpm i svelte-flatpickr-plus`
 
-## Usage
+## Basic Usage
 
 you can import any actions and passing options to that actions that all you need to do
 
@@ -43,10 +43,10 @@ example for build date picker element
 
 ```
 <script>
-    //? import svelte action from
+    //? import datePicker svelte action from 'svelte-flatpickr-plus'
     import { datePicker } from 'svelte-flatpickr-plus';
 
-    //? decalre any options you want to set in flatpickr
+    //? declare any options you want to set in flatpickr
     const options = {
             dateFormat: 'Z',
             altFormat: 'd F Y',
