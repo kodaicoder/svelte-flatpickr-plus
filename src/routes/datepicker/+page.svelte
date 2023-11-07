@@ -33,6 +33,19 @@
 		defaultDate: '2023-12-30',
 		resetToDefault: true
 	};
+	const defaultTimeOptions = {
+		...datepickerOptions,
+		defaultDate: '12:30',
+		resetToDefault: true,
+		enableTime: true,
+		noCalendar: true,
+		dateFormat: 'H:i',
+		altFormat: 'H:i',
+		// altInput: true,
+		minDate: undefined,
+		maxDate: undefined,
+		disable: []
+	};
 
 	const wrapDatepickerOptions = {
 		...datepickerOptions,
@@ -91,8 +104,14 @@
 	</div>
 </section>
 <br />
+<section>
+	<label for="normalDatepickerDefaultDate">Time picker with initial hours: </label>
+	<br />
+	<input name="normalDatepickerDefaultDate" use:datePicker={defaultTimeOptions} />
+</section>
+<br />
 
-<h1>Using in from</h1>
+<h1>Using in form</h1>
 <form method="POST" use:enhance>
 	<section>
 		<label for="datepicker1">Date picker: </label>
