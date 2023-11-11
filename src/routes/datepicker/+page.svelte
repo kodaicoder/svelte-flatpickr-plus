@@ -44,8 +44,6 @@
 		}
 	};
 
-
-
 	const wrapOptions = {
 		...dateOptions,
 		wrap: true
@@ -57,12 +55,11 @@
 		locale: Thai
 	};
 
-
 	const timeOptions = {
 		defaultDate: '12:30',
 		enableTime: true,
 		noCalendar: true,
-		dateFormat: 'H:i',
+		dateFormat: 'H:i'
 	};
 
 	const changeHandler = (event) => {
@@ -436,17 +433,15 @@ const handdleDatepickerBindClick = () => {
 		</div>
 		<details>
 			<summary>How to ?</summary>
-			<p>
-				Adding 'noCalendar' and 'enableTime' to display only time picker.
-			</p>
+			<p>Adding 'noCalendar' and 'enableTime' to display only time picker.</p>
 			<div style="display:flex;gap:1rem;flex-wrap: wrap;">
 				<CodeShowBlock
 					title="Options"
 					code={`const dateOptions = {
-		defaultDate: '12:30',
-		enableTime: true,
-		noCalendar: true,
-		dateFormat: 'H:i',
+	defaultDate: '12:30',
+	enableTime: true,
+	noCalendar: true,
+	dateFormat: 'H:i',
 };`}
 				/>
 				<CodeShowBlock
