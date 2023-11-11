@@ -43,6 +43,9 @@
 			console.log('on close hook!');
 		}
 	};
+
+
+
 	const wrapOptions = {
 		...dateOptions,
 		wrap: true
@@ -52,6 +55,14 @@
 		...dateOptions,
 		useLocaleYear: true,
 		locale: Thai
+	};
+
+
+	const timeOptions = {
+		defaultDate: '12:30',
+		enableTime: true,
+		noCalendar: true,
+		dateFormat: 'H:i',
 	};
 
 	const changeHandler = (event) => {
@@ -410,6 +421,36 @@ const handdleDatepickerBindClick = () => {
 				/>
 				<CodeShowBlock
 					code={`<input name="localizeDatepicker" use:datePicker={localizeOptions} readonly />`}
+				/>
+			</div>
+		</details>
+	</section>
+	<br />
+	<section>
+		<div>
+			<h4 id="timedatepicker" for="timeDatepicker">
+				Time picker with initial hours<a href="#timedatepicker" class="permalink">🔗</a>
+			</h4>
+
+			<input name="timeDatepicker" use:datePicker={timeOptions} readonly />
+		</div>
+		<details>
+			<summary>How to ?</summary>
+			<p>
+				Adding 'noCalendar' and 'enableTime' to display only time picker.
+			</p>
+			<div style="display:flex;gap:1rem;flex-wrap: wrap;">
+				<CodeShowBlock
+					title="Options"
+					code={`const dateOptions = {
+		defaultDate: '12:30',
+		enableTime: true,
+		noCalendar: true,
+		dateFormat: 'H:i',
+};`}
+				/>
+				<CodeShowBlock
+					code={`<input name="timedatepicker" use:datePicker={timeOptions} readonly />`}
 				/>
 			</div>
 		</details>

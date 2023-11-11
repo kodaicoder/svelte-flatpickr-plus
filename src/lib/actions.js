@@ -194,7 +194,7 @@ function modifyHooks(opts = {}, node) {
     return opts;
 }
 
-function attachFlatpickr(node, opts, plugins = [new yearDropdownPlugin()]) {
+function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [new yearDropdownPlugin()]) {
     const fp = flatpickr(node, {
         ...opts,
         plugins: plugins
