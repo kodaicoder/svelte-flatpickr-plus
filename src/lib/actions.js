@@ -216,7 +216,7 @@ function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [new yearD
     return fp;
 }
 
-/** @type {import('svelte/action').Action<HTMLInputElement, Options>}  */
+/** @type {import('svelte/action').Action<HTMLElement, Options>}  */
 export const datePicker = async (node, options) => {
     options = { ...defaultOptions, ...options };
     const opts = modifyHooks(options, node);
@@ -230,7 +230,7 @@ export const datePicker = async (node, options) => {
         },
     };
 }
-/** @type {import('svelte/action').Action<HTMLInputElement, Options>}  */
+/** @type {import('svelte/action').Action<HTMLElement, Options>}  */
 export const monthPicker = async (node, options) => {
     options = { ...defaultOptions, ...options };
     const opts = modifyHooks(options, node);
@@ -255,7 +255,7 @@ export const monthPicker = async (node, options) => {
         },
     };
 }
-/** @type {import('svelte/action').Action<HTMLInputElement, Options>}  */
+/** @type {import('svelte/action').Action<HTMLElement, Options>}  */
 export const dateRangePicker = async (node, options) => {
     //...defaultOptions,
     options = { ...defaultOptions, ...options, mode: 'range' };
@@ -270,7 +270,7 @@ export const dateRangePicker = async (node, options) => {
         },
     };
 }
-/** @type {import('svelte/action').Action<HTMLInputElement, Options>}  */
+/** @type {import('svelte/action').Action<HTMLElement, Options>}  */
 export const monthRangePicker = async (node, options) => {
     // ...defaultOptions,
     options = { ...defaultOptions, ...options, mode: 'range' };
