@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   flatpickr_plus:
-    specifier: ^1.1.6
-    version: 1.1.6
+    specifier: ^1.1.9
+    version: 1.1.9
   postcss:
     specifier: ^8.4.31
     version: 8.4.31
@@ -20,46 +20,46 @@ dependencies:
 
 devDependencies:
   '@sveltejs/adapter-auto':
-    specifier: ^2.0.0
+    specifier: ^2.1.0
     version: 2.1.0(@sveltejs/kit@1.22.6)
   '@sveltejs/kit':
-    specifier: ^1.20.4
+    specifier: ^1.22.6
     version: 1.22.6(svelte@4.2.0)(vite@4.4.9)
   '@sveltejs/package':
-    specifier: ^2.0.0
+    specifier: ^2.2.1
     version: 2.2.1(svelte@4.2.0)(typescript@5.1.6)
   eslint:
-    specifier: ^8.28.0
+    specifier: ^8.47.0
     version: 8.47.0
   eslint-config-prettier:
-    specifier: ^8.5.0
+    specifier: ^8.10.0
     version: 8.10.0(eslint@8.47.0)
   eslint-plugin-svelte:
-    specifier: ^2.30.0
+    specifier: ^2.32.4
     version: 2.32.4(eslint@8.47.0)(svelte@4.2.0)
   prettier:
-    specifier: ^2.8.0
+    specifier: ^2.8.8
     version: 2.8.8
   prettier-plugin-svelte:
     specifier: ^2.10.1
     version: 2.10.1(prettier@2.8.8)(svelte@4.2.0)
   publint:
-    specifier: ^0.1.9
+    specifier: ^0.1.16
     version: 0.1.16
   svelte:
-    specifier: ^4.0.5
+    specifier: ^4.2.0
     version: 4.2.0
   svelte-check:
-    specifier: ^3.4.3
+    specifier: ^3.5.0
     version: 3.5.0(postcss@8.4.31)(svelte@4.2.0)
   tslib:
-    specifier: ^2.4.1
+    specifier: ^2.6.1
     version: 2.6.1
   typescript:
-    specifier: ^5.0.0
+    specifier: ^5.1.6
     version: 5.1.6
   vite:
-    specifier: ^4.4.2
+    specifier: ^4.4.9
     version: 4.4.9
 
 packages:
@@ -930,8 +930,8 @@ packages:
       rimraf: 3.0.2
     dev: true
 
-  /flatpickr_plus@1.1.6:
-    resolution: {integrity: sha512-Pk81ZGkN0RbrSn7iMVVnchfuPJeKrrW1UxYIGpIZYI2qJ5Sg1X8moebtFklchViXSv1tbMREtekxxmNgxasfAQ==}
+  /flatpickr_plus@1.1.9:
+    resolution: {integrity: sha512-TI4CELDuhgUrswOgwCU7uFRtBocnPKRyFm3W1KqqQE2R+aQ5OhjmARHiHEv42O14Af2uH3yt0zdL08ux4r3m7w==}
     dev: false
 
   /flatted@3.2.7:
