@@ -118,7 +118,7 @@ const defaultOptions = {
     defaultMinute: 0,
     defaultSeconds: 0,
     disable: [],
-    disableMobile: false,
+    disableMobile: true,
     enableSeconds: false,
     enableTime: false,
     hourIncrement: 1,
