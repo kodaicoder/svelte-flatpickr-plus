@@ -199,7 +199,6 @@ function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [new yearD
         ...opts,
         plugins: plugins
     });
-
     function resetFlatpickr(event) {
         fp.clear();
         //prevent further actual reset form event
@@ -207,12 +206,10 @@ function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [new yearD
         if (opts.defaultDate && opts.resetToDefault)
             event.preventDefault();
     }
-
     if (opts.wrap)
         node.querySelector('input').form?.addEventListener('reset', resetFlatpickr);
     else
         node.form?.addEventListener('reset', resetFlatpickr);
-
     return fp;
 }
 
@@ -220,9 +217,7 @@ function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [new yearD
 export const datePicker = async (node, options) => {
     options = { ...defaultOptions, ...options };
     const opts = modifyHooks(options, node);
-
     const datepickerInstance = attachFlatpickr(node, opts);
-
     return {
         destroy() {
             datepickerInstance.destroy();
@@ -234,7 +229,6 @@ export const datePicker = async (node, options) => {
 export const monthPicker = async (node, options) => {
     options = { ...defaultOptions, ...options };
     const opts = modifyHooks(options, node);
-
     const monthPlugins =
         [
             new monthSelectPlugin({
@@ -244,10 +238,7 @@ export const monthPicker = async (node, options) => {
             }),
             new yearDropdownPlugin(),
         ]
-
-
     const monthPickerInstance = attachFlatpickr(node, opts, monthPlugins);
-
     return {
         destroy() {
             monthPickerInstance.destroy();
@@ -257,12 +248,9 @@ export const monthPicker = async (node, options) => {
 }
 /** @type {import('svelte/action').Action<HTMLElement, Options>}  */
 export const dateRangePicker = async (node, options) => {
-    //...defaultOptions,
     options = { ...defaultOptions, ...options, mode: 'range' };
     const opts = modifyHooks(options, node);
-
     const datepickerRangeInstance = attachFlatpickr(node, opts);
-
     return {
         destroy() {
             datepickerRangeInstance.destroy();
@@ -272,10 +260,8 @@ export const dateRangePicker = async (node, options) => {
 }
 /** @type {import('svelte/action').Action<HTMLElement, Options>}  */
 export const monthRangePicker = async (node, options) => {
-    // ...defaultOptions,
     options = { ...defaultOptions, ...options, mode: 'range' };
     const opts = modifyHooks(options, node);
-
     const monthRangePlugins =
         [
             new monthSelectPlugin({
@@ -285,10 +271,7 @@ export const monthRangePicker = async (node, options) => {
             }),
             new yearDropdownPlugin(),
         ]
-
-
     const monthRangePickerInstance = attachFlatpickr(node, opts, monthRangePlugins);
-
     return {
         destroy() {
             monthRangePickerInstance.destroy();
