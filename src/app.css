@@ -82,7 +82,7 @@ tr:hover {
 }
 .details section details {
 	cursor: pointer;
-	padding-top: 1rem;
+	margin-top: 1rem;
 }
 
 .details section summary {

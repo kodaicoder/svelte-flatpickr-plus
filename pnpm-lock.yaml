@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   flatpickr_plus:
-    specifier: ^1.1.10
-    version: 1.1.10
+    specifier: ^1.1.12
+    version: 1.1.12
   postcss:
     specifier: ^8.4.31
     version: 8.4.31
@@ -930,8 +930,8 @@ packages:
       rimraf: 3.0.2
     dev: true
 
-  /flatpickr_plus@1.1.10:
-    resolution: {integrity: sha512-znrzlS/0v62blI4goG/1ytYL2uTrYbRqpKLeT+ZvA9uHWhjyTYhZFOVGUO24spBKuayvyNFSgqUtqHRktC/GgA==}
+  /flatpickr_plus@1.1.12:
+    resolution: {integrity: sha512-L49uLgKa1dkDDxe2mtzU2f0Sbi1pkehTwcgcbVJrtjdvAb8oXV3PkQs9gkjIDGkvsYPoC72noxiHgrOoXt91fg==}
     dev: false
 
   /flatted@3.2.7:

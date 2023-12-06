@@ -103,7 +103,7 @@ import 'flatpickr_plus/dist/plugins/monthSelect/style.css';
 
 /** @type {Options} */
 const defaultOptions = {
-    allowInput: false,
+    allowInput: true,
     allowInvalidPreload: false,
     altFormat: "F j, Y",
     altInput: false,
@@ -197,6 +197,19 @@ function modifyHooks(opts = {}, node) {
 function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [new yearDropdownPlugin()]) {
     const fp = flatpickr(node, {
         ...opts,
+        onOpen: [
+            function (selectedDates, dateStr, instance) {
+                instance.altInput.setAttribute('readonly', true);
+            },
+            ...opts.onOpen
+        ],
+        onClose: [
+            function (selectedDates, dateStr, instance) {
+                instance.altInput.setAttribute('readonly', false);
+                instance.altInput.blur();
+            },
+            ...opts.onClose
+        ],
         plugins: plugins
     });
     function resetFlatpickr(event) {

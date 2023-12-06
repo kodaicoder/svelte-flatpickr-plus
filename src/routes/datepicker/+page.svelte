@@ -429,7 +429,7 @@ const handdleDatepickerBindClick = () => {
 				Time picker with initial hours<a href="#timedatepicker" class="permalink">🔗</a>
 			</h4>
 
-			<input name="timeDatepicker" use:datePicker={timeOptions} readonly />
+			<input name="timeDatepicker" use:datePicker={timeOptions} readonly  />
 		</div>
 		<details>
 			<summary>How to ?</summary>
