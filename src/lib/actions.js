@@ -198,15 +198,35 @@ function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [new yearD
     const fp = flatpickr(node, {
         ...opts,
         onOpen: [
-            function (selectedDates, dateStr, instance) {
-                instance.altInput.setAttribute('readonly', true);
+            async function (selectedDates, dateStr, instance) {
+                if (instance.altInput) {
+                    instance.altInput.setAttribute('readonly', true);
+
+                    const dayElement = await instance.days;
+                    if (dayElement) {
+                        if (dayElement.querySelector('.today')) {
+                            dayElement.querySelector('.today').focus();
+                        } else {
+                            dayElement.querySelector('.selected').focus();
+                        }
+                    }
+                } else {
+                    instance.input.setAttribute('readonly', true);
+                    instance.hourElement.focus()
+                    console.log();
+                }
             },
             ...opts.onOpen
         ],
         onClose: [
             function (selectedDates, dateStr, instance) {
-                instance.altInput.setAttribute('readonly', false);
-                instance.altInput.blur();
+                if (instance.altInput) {
+                    instance.altInput.setAttribute('readonly', false);
+                    instance.altInput.blur();
+                } else {
+                    instance.input.setAttribute('readonly', false);
+                    instance.input.blur();
+                }
             },
             ...opts.onClose
         ],
