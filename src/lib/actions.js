@@ -212,8 +212,16 @@ function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [new yearD
                     }
                 } else {
                     instance.input.setAttribute('readonly', true);
+                    const dayElement = await instance.days;
+                    if (dayElement) {
+                        if (dayElement.querySelector('.today')) {
+                            dayElement.querySelector('.today').focus();
+                        } else {
+                            dayElement.querySelector('.selected').focus();
+                        }
+                        return
+                    }
                     instance.hourElement.focus()
-                    console.log();
                 }
             },
             ...opts.onOpen
