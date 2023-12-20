@@ -200,8 +200,9 @@ function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [new yearD
         onOpen: [
             async function (selectedDates, dateStr, instance) {
                 if (instance.altInput) {
-                    instance.altInput.setAttribute('readonly', true);
-
+                    if (!opts.allowInput) {
+                        instance.altInput.setAttribute('readonly', true);
+                    }
                     const dayElement = await instance.days;
                     if (dayElement) {
                         if (dayElement.querySelector('.today')) {
@@ -211,7 +212,9 @@ function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [new yearD
                         }
                     }
                 } else {
-                    instance.input.setAttribute('readonly', true);
+                    if (!opts.allowInput) {
+                        instance.input.setAttribute('readonly', true);
+                    }
                     const dayElement = await instance.days;
                     if (dayElement) {
                         if (dayElement.querySelector('.today')) {
@@ -229,10 +232,10 @@ function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [new yearD
         onClose: [
             function (selectedDates, dateStr, instance) {
                 if (instance.altInput) {
-                    instance.altInput.setAttribute('readonly', false);
+                    instance.altInput.removeAttribute('readonly');
                     instance.altInput.blur();
                 } else {
-                    instance.input.setAttribute('readonly', false);
+                    instance.input.removeAttribute('readonly');
                     instance.input.blur();
                 }
             },
