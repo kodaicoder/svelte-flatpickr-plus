@@ -202,7 +202,7 @@
 		<tbody>
 			<tr>
 				<td>allowInput</td>
-				<td>false</td>
+				<td>true</td>
 				<td>Boolean</td>
 				<td
 					>Allows the user to enter a date directly input the input field. By default, direct entry
