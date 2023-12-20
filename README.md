@@ -1,6 +1,6 @@
 ## flatpickr - javascript datetime picker
 
-[![npm version](https://badge.fury.io/js/svelte-flatpickr-plus.svg)](https://www.npmjs.com/package/svelte-flatpickr-plus)
+[![npm](https://img.shields.io/npm/v/svelte-flatpickr-plus?logo=npm&color=green)](https://www.npmjs.com/package/svelte-flatpickr-plus)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=plastic)](https://raw.githubusercontent.com/flatpickr/flatpickr/master/LICENSE.md)
 
 ## Svelte Flatpickr Plus
