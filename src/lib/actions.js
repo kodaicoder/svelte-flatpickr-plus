@@ -1,8 +1,14 @@
-import flatpickr from 'flatpickr_plus';
-import yearDropdownPlugin from 'flatpickr_plus/dist/plugins/yearDropdown';
-import monthSelectPlugin from 'flatpickr_plus/dist/plugins/monthSelect';
-import 'flatpickr_plus/dist/flatpickr.css';
-import 'flatpickr_plus/dist/plugins/monthSelect/style.css';
+import flatpickr from '../../../../flatpickr_-locale_year/src'
+import yearDropdownPlugin from '../../../../flatpickr_-locale_year/src/plugins/yearDropdown';
+import monthSelectPlugin from '../../../../flatpickr_-locale_year/src/plugins/monthSelect';
+import '../../../../flatpickr_-locale_year/dist/flatpickr.css';
+import '../../../../flatpickr_-locale_year/dist/plugins/monthSelect/style.css';
+
+// import flatpickr from 'flatpickr_plus';
+// import yearDropdownPlugin from 'flatpickr_plus/dist/plugins/yearDropdown';
+// import monthSelectPlugin from 'flatpickr_plus/dist/plugins/monthSelect';
+// import 'flatpickr_plus/dist/flatpickr.css';
+// import 'flatpickr_plus/dist/plugins/monthSelect/style.css';
 
 /**
  * Represents a date option that can be either a Date object, a string, or a number.
