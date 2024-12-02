@@ -33,7 +33,7 @@ import 'flatpickr_plus/dist/plugins/monthSelect/style.css';
  * @typedef {"onChange" | "onClose" | "onDayCreate" | "onDestroy" | "onKeyDown" | "onMonthChange" | "onOpen" | "onParseConfig" | "onReady" | "onValueUpdate" | "onYearChange" | "onPreCalendarPosition"} HookKey
  */
 /**
- * @typedef {Object} Options
+ * @typedef {Object} FlatpickrOptions
  * @property {boolean}  [allowInput]  - Allows the user to enter a date directly into the input field. By default, direct entry is disabled.
  * @property {boolean} [allowInvalidPreload] - Allow preloading of an invalid date.
  * @property {string} [altFormat] - Exactly the same as date format, but for the altInput field.
@@ -51,9 +51,9 @@ import 'flatpickr_plus/dist/plugins/monthSelect/style.css';
  * @property {number} [defaultHour] - Initial value of the hour element, when no date is selected.
  * @property {number} [defaultMinute] - Initial value of the minute element, when no date is selected.
  * @property {number} [defaultSeconds] - Initial value of the seconds element, when no date is selected.
- * @property {DateLimit<DateOption>[]} [disable - Disables certain dates, preventing them from being selected. See https://chmln.github.io/flatpickr/examples/#disabling-specific-dates
+ * @property {DateLimit<DateOption>[]} [disable] - Disables certain dates, preventing them from being selected. See https://chmln.github.io/flatpickr/examples/#disabling-specific-dates
  * @property {boolean} [disableMobile] - Set this to true to always use the non-native picker on mobile devices. By default, Flatpickr utilizes native datetime widgets unless certain options (e.g., disable) are used.
- * @property {DateLimit<DateOption>[]} [enable - Disables all dates except these specified. See https://chmln.github.io/flatpickr/examples/#disabling-all-dates-except-select-few
+ * @property {DateLimit<DateOption>[]} [enable] - Disables all dates except these specified. See https://chmln.github.io/flatpickr/examples/#disabling-all-dates-except-select-few
  * @property {boolean} [enableSeconds] - Enables seconds selection in the time picker.
  * @property {boolean} [enableTime] - Enables the time picker.
  * @property {(e: Error) => void} [errorHandler] - Allows using a custom error handling function.
@@ -62,12 +62,13 @@ import 'flatpickr_plus/dist/plugins/monthSelect/style.css';
  * @property {number} [hourIncrement] - Adjusts the step for the hour input (including scrolling).
  * @property {HTMLElement[]} [ignoredFocusElements] - By default, clicking anywhere outside of the calendar/input will close the calendar. Clicking on elements specified in this option will not close the calendar.
  * @property {boolean} [inline] - Displays the calendar inline.
+ * @property {boolean} [isMonthPicker] - Whether the calendar is a month picker.
  * @property {any | Partial<any>} [locale] - The locale, either as a string (e.g., "ru", "en") or as an object. See https://chmln.github.io/flatpickr/localization/
  * @property {DateOption} [maxDate] - The maximum date that a user can pick (inclusive).
  * @property {DateOption} [maxTime] - The maximum time that a user can pick (inclusive).
  * @property {DateOption} [minDate] - The minimum date that a user can pick (inclusive).
  * @property {DateOption} [minTime] - The minimum time that a user can pick (inclusive).
- * @property {number} [minuteIncrement - Adjusts the step for the minute input (including scrolling). Defaults to 5.
+ * @property {number} [minuteIncrement] - Adjusts the step for the minute input (including scrolling). Defaults to 5.
  * @property {"single" | "multiple" | "range" | "time"} [mode] - Date selection mode, defaults to "single".
  * @property {"dropdown" | "static"} [monthSelectorType] - How the month selector in the calendar should be shown.
  * @property {string} [nextArrow] - HTML for the right arrow icon, used to switch months.
@@ -91,6 +92,7 @@ import 'flatpickr_plus/dist/plugins/monthSelect/style.css';
  * @property {Element} [positionElement] - The element off of which the calendar will be positioned. Defaults to the date input.
  * @property {string} [prevArrow] - HTML for the left arrow icon, used to switch months.
  * @property {boolean} [shorthandCurrentMonth] - Whether to display the current month name in shorthand mode, e.g., "Sep" instead of "September".
+ * @property {boolean} [shorthand] - Whether to display the current date in shorthand mode.
  * @property {boolean} [static] - Creates a wrapper to position the calendar. Use this if the input is inside a scrollable element.
  * @property {number} [showMonths] - Sets the number of months to show.
  * @property {boolean} [time_24hr] - Displays time picker in 24-hour mode without AM/PM selection when enabled.
@@ -101,7 +103,7 @@ import 'flatpickr_plus/dist/plugins/monthSelect/style.css';
  * @property {boolean} [resetToDefault] - Handling reset and selected a default date.
  */
 
-/** @type {Options} */
+/** @type {FlatpickrOptions} */
 const defaultOptions = {
     allowInput: true,
     allowInvalidPreload: false,
@@ -124,6 +126,7 @@ const defaultOptions = {
     hourIncrement: 1,
     ignoredFocusElements: [],
     inline: false,
+    isMonthPicker: false,
     locale: "default",
     minuteIncrement: 5,
     mode: "single",
@@ -156,17 +159,24 @@ const defaultOptions = {
     resetMoveDefault: true,
     resetToDefault: true,
 };
+/** @type {FlatpickrOptions} */
+const defaultMonthOptions = {
+    ...defaultOptions,
+    altFormat: 'F Y',
+    ariaDateFormat: 'F Y',
+    dateFormat: 'F Y'
+}
 
 /** @type {HookKey[]} */
 const hooks = [
     'onChange',
-    'onOpen',
-    'onClose',
     'onMonthChange',
     'onYearChange',
     'onReady',
-    'onValueUpdate',
+    'onOpen',
     'onDayCreate',
+    'onClose',
+    'onValueUpdate'
 ];
 
 function removeOn(hook) {
@@ -194,37 +204,52 @@ function modifyHooks(opts = {}, node) {
     return opts;
 }
 
-function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [new yearDropdownPlugin()]) {
+function resetFlatpickr(event, fp, opts) {
+    fp.clear();
+    //prevent further actual reset form event
+    //to prevent a data in input got clear again
+    if (opts.defaultDate && opts.resetToDefault)
+        event.preventDefault();
+}
+
+
+let instance;
+
+function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [yearDropdownPlugin()]) {
+    node.setAttribute('autocomplete', 'off');
+    if (!opts.allowInput) {
+        node.setAttribute('readonly', 'true');
+    }
     const fp = flatpickr(node, {
         ...opts,
         onOpen: [
             async function (selectedDates, dateStr, instance) {
-                if (instance.altInput) {
-                    if (!opts.allowInput) {
-                        instance.altInput.setAttribute('readonly', true);
-                    }
-                    const dayElement = await instance.days;
-                    if (dayElement) {
-                        if (dayElement.querySelector('.today')) {
-                            dayElement.querySelector('.today').focus();
-                        } else {
-                            dayElement.querySelector('.selected').focus();
+                if (!opts.allowInput) {
+                    if (instance.altInput) {
+                        const dayElement = await instance.days;
+                        if (dayElement) {
+                            if (dayElement.querySelector('.today')) {
+                                /** @type {HTMLElement} */
+                                (dayElement.querySelector('.today'))?.focus();
+                            } else {
+                                /** @type {HTMLElement} */
+                                (dayElement.querySelector('.selected'))?.focus();
+                            }
                         }
-                    }
-                } else {
-                    if (!opts.allowInput) {
-                        instance.input.setAttribute('readonly', true);
-                    }
-                    const dayElement = await instance.days;
-                    if (dayElement) {
-                        if (dayElement.querySelector('.today')) {
-                            dayElement.querySelector('.today').focus();
-                        } else {
-                            dayElement.querySelector('.selected').focus();
+                    } else {
+                        const dayElement = await instance.days;
+                        if (dayElement) {
+                            if (dayElement.querySelector('.today')) {
+                                /** @type {HTMLElement} */
+                                (dayElement.querySelector('.today'))?.focus();
+                            } else {
+                                /** @type {HTMLElement} */
+                                (dayElement.querySelector('.selected'))?.focus();
+                            }
+                            return
                         }
-                        return
+                        instance.hourElement?.focus()
                     }
-                    instance.hourElement.focus()
                 }
             },
             ...opts.onOpen
@@ -232,10 +257,8 @@ function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [new yearD
         onClose: [
             function (selectedDates, dateStr, instance) {
                 if (instance.altInput) {
-                    instance.altInput.removeAttribute('readonly');
                     instance.altInput.blur();
                 } else {
-                    instance.input.removeAttribute('readonly');
                     instance.input.blur();
                 }
             },
@@ -243,86 +266,63 @@ function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [new yearD
         ],
         plugins: plugins
     });
-    function resetFlatpickr(event) {
-        fp.clear();
-        //prevent further actual reset form event
-        //to prevent a data in input got clear again
-        if (opts.defaultDate && opts.resetToDefault)
-            event.preventDefault();
-    }
+
     if (opts.wrap)
-        node.querySelector('input').form?.addEventListener('reset', resetFlatpickr);
+        node.querySelector('input').form?.addEventListener('reset', resetFlatpickr(fp, opts));
     else
-        node.form?.addEventListener('reset', resetFlatpickr);
+        node.form?.addEventListener('reset', resetFlatpickr(fp, opts));
     return fp;
 }
 
-/** @type {import('svelte/action').Action<HTMLElement, Options>}  */
-export const datePicker = async (node, options) => {
+/** @type {import('svelte/action').Action} */
+const datePicker = (node, options) => {
     options = { ...defaultOptions, ...options };
     const opts = modifyHooks(options, node);
-    const datepickerInstance = attachFlatpickr(node, opts);
+    instance = attachFlatpickr(node, opts);
+
     return {
         destroy() {
-            datepickerInstance.destroy();
-            datepickerInstance.removeEventListener('reset');
+            instance.destroy();
+            instance._input?.form?.removeEventListener('reset', resetFlatpickr(fp, opts));
         },
     };
 }
-/** @type {import('svelte/action').Action<HTMLElement, Options>}  */
-export const monthPicker = async (node, options) => {
+
+/** @type {import('svelte/action').Action} */
+const monthPicker = (node, options) => {
     options = { ...defaultOptions, ...options };
     const opts = modifyHooks(options, node);
     const monthPlugins =
         [
-            new monthSelectPlugin({
+            monthSelectPlugin({
                 shorthand: options.shorthand, //defaults to false
                 dateFormat: options.dateFormat, //defaults to "F Y"
                 altFormat: options.altFormat //defaults to "F Y"
             }),
-            new yearDropdownPlugin(),
+            yearDropdownPlugin(),
         ]
-    const monthPickerInstance = attachFlatpickr(node, opts, monthPlugins);
+    instance = attachFlatpickr(node, opts, monthPlugins);
+
     return {
         destroy() {
-            monthPickerInstance.destroy();
-            monthPickerInstance.removeEventListener('reset');
-        },
-    };
-}
-/** @type {import('svelte/action').Action<HTMLElement, Options>}  */
-export const dateRangePicker = async (node, options) => {
-    options = { ...defaultOptions, ...options, mode: 'range' };
-    const opts = modifyHooks(options, node);
-    const datepickerRangeInstance = attachFlatpickr(node, opts);
-    return {
-        destroy() {
-            datepickerRangeInstance.destroy();
-            datepickerRangeInstance.removeEventListener('reset');
-        },
-    };
-}
-/** @type {import('svelte/action').Action<HTMLElement, Options>}  */
-export const monthRangePicker = async (node, options) => {
-    options = { ...defaultOptions, ...options, mode: 'range' };
-    const opts = modifyHooks(options, node);
-    const monthRangePlugins =
-        [
-            new monthSelectPlugin({
-                shorthand: options.shorthand, //defaults to false
-                dateFormat: options.dateFormat, //defaults to "F Y"
-                altFormat: options.altFormat //defaults to "F Y"
-            }),
-            new yearDropdownPlugin(),
-        ]
-    const monthRangePickerInstance = attachFlatpickr(node, opts, monthRangePlugins);
-    return {
-        destroy() {
-            monthRangePickerInstance.destroy();
-            monthRangePickerInstance.removeEventListener('reset');
+            instance.destroy();
+            instance._input?.form?.removeEventListener('reset', resetFlatpickr(fp, opts));
         },
     };
 }
 
+/** @type {import('svelte/action').Action} */
+export default function (node, options = defaultOptions) {
+    if (options.isMonthPicker) {
+        options = {
+            ...defaultMonthOptions, ...options
+        }
+        return monthPicker(node, options);
+    } else {
+        options = {
+            ...defaultOptions, ...options
+        }
+        return datePicker(node, options);
+    }
 
-
+}

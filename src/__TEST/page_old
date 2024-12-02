@@ -1,103 +1,6 @@
 <script>
 	import CodeShowBlock from '$components/CodeShowBlock.svelte';
-	// calling actions
-	import { datePicker, monthPicker, dateRangePicker, monthRangePicker } from '$lib';
-
-	const datepickerOptions = {
-		dateFormat: 'Z',
-		altFormat: 'd F Y',
-		altInput: true,
-		ariaDateFormat: 'd F Y',
-		useLocaleYear: true,
-		minDate: '2019-03',
-		maxDate: '2033-12-31',
-		disable: ['2023-08-30', '2023-07-21', '2023-06-08', new Date(2023, 6, 8)],
-		resetMoveDefault: false,
-		position: 'auto left',
-		onChange: (selectedDates, dateStr) => {
-			console.log('on change event!');
-			console.log(selectedDates[0]);
-			console.log(dateStr);
-		},
-		onOpen: (selectedDates, dateStr) => {
-			console.log('on open event!');
-		},
-		onClose: (selectedDates, dateStr) => {
-			console.log('on close event!');
-		}
-	};
-
-	const monthPickerOptions = {
-		dateFormat: 'Z',
-		altFormat: 'F Y',
-		altInput: true,
-		ariaDateFormat: 'F Y',
-		useLocaleYear: true,
-		minDate: '2019-01',
-		maxDate: '2033-04',
-		disable: ['2023-09', '2022-07', '2021-03', new Date(2020, 11, 1)],
-		resetMoveDefault: false,
-		position: 'auto left',
-		onChange: (selectedDates, dateStr) => {
-			console.log('on change event!');
-			console.log(selectedDates[0]);
-			console.log(dateStr);
-		},
-		onOpen: (selectedDates, dateStr) => {
-			console.log('on open event!');
-		},
-		onClose: (selectedDates, dateStr) => {
-			console.log('on close event!');
-		}
-	};
-
-	const dateRangePickerOptions = {
-		dateFormat: 'Z',
-		altFormat: 'd M y',
-		altInput: true,
-		ariaDateFormat: 'd M y',
-		useLocaleYear: true,
-		minDate: '2019-03',
-		maxDate: '2033-12-31',
-		disable: ['2023-08-30', '2023-07-21', '2023-06-08', new Date(2023, 6, 8)],
-		resetMoveDefault: false,
-		position: 'auto left',
-		onChange: (selectedDates, dateStr) => {
-			console.log('on change event!');
-			console.log(selectedDates[0]);
-			console.log(dateStr);
-		},
-		onOpen: (selectedDates, dateStr) => {
-			console.log('on open event!');
-		},
-		onClose: (selectedDates, dateStr) => {
-			console.log('on close event!');
-		}
-	};
-
-	const monthRangePickerOptions = {
-		dateFormat: 'Z',
-		altFormat: 'F Y',
-		altInput: true,
-		ariaDateFormat: 'F Y',
-		useLocaleYear: true,
-		minDate: '2019-01',
-		maxDate: '2033-04',
-		disable: ['2023-09', '2022-07', '2021-03', new Date(2020, 11, 1)],
-		resetMoveDefault: false,
-		position: 'auto left',
-		onChange: (selectedDates, dateStr) => {
-			console.log('on change event!');
-			console.log(selectedDates[0]);
-			console.log(dateStr);
-		},
-		onOpen: (selectedDates, dateStr) => {
-			console.log('on open event!');
-		},
-		onClose: (selectedDates, dateStr) => {
-			console.log('on close event!');
-		}
-	};
+	import svlatepickr from '$lib';
 </script>
 
 <h1>Welcome to Svelte Flatpickr Plus</h1>
@@ -106,7 +9,7 @@
 	Flatpickr is a lightweight and powerful datetime picker. Svelte Flatpickr Plus is a wrapper for
 	Flatpickr with some extra features.
 </p>
-
+<hr />
 <h2>What is difference from Svelte Flatpickr ?</h2>
 <ul>
 	<li>
@@ -128,49 +31,92 @@
 		changed.
 	</li>
 </ul>
-
-<h2 id="actions">Actions<a href="#actions" class="permalink">🔗</a></h2>
-<p>Svelte Flatpickr Plus coming with 4 actions</p>
-<ul>
-	<li><a href="/datepicker">datePicker</a></li>
-	<li><a href="/monthpicker">monthPicker</a></li>
-	<li><a href="/daterangepicker">dateRangePicker</a></li>
-	<li><a href="/monthrangepicker">monthRangePicker</a></li>
-</ul>
-<br />
+<hr />
 <h2 id="basic_usage">Basic Usage<a href="#basic_usage" class="permalink">🔗</a></h2>
-<div style="display: flex; gap: 1rem;">
-	<div class="element-block">
-		<h3>Date Picker</h3>
-		<div>
-			<input use:datePicker placeholder="please select date" readonly />
-		</div>
-	</div>
-
-	<CodeShowBlock code={`<input use:datePicker placeholder="please select date" readonly />`} />
+<div style="display: flex; flex-direction: column;">
+	<h3>First let import actions</h3>
+	<p style="margin-top:0;">
+		you can name the actions as you like
+		<br />
+		but in this document I will calling it &nbsp;
+		<b style="font-size:1.25rem"><i>svlatepickr</i></b> &nbsp;(svelte + flatpickr)
+	</p>
+	<CodeShowBlock
+		hideTitle={true}
+		code={`<script>
+  //you can name the actions as you like..
+  import svlatepickr from 'svelte-flatpickr-plus';
+</script>`}
+		style="max-width:25rem;"
+	/>
 </div>
 <hr />
 <div style="display: flex; gap: 1rem;">
 	<div class="element-block">
-		<h3>Month Picker</h3>
+		<h3>Date Picker</h3>
 		<div>
-			<input use:monthPicker placeholder="please select month" readonly />
+			<input use:svlatepickr placeholder="please select date" readonly />
 		</div>
 	</div>
-
-	<CodeShowBlock code={`<input use:monthPicker placeholder="please select month" readonly />`} />
+	<CodeShowBlock code={`<input use:svlatepickr placeholder="please select date" readonly />`} />
+</div>
+<hr />
+<div style="display: flex; gap: 1rem;">
+	<div class="element-block">
+		<h3>Multiple Date Picker</h3>
+		<div>
+			<input
+				use:svlatepickr={{ mode: 'multiple' }}
+				placeholder="please select multiple date"
+				readonly
+			/>
+		</div>
+	</div>
+	<CodeShowBlock
+		code={`<input use:svlatepickr={{ mode: 'multiple' }} placeholder="please select multiple date" readonly />`}
+	/>
 </div>
 <hr />
 <div style="display: flex; gap: 1rem;">
 	<div class="element-block">
 		<h3>Date Range Picker</h3>
 		<div>
-			<input use:dateRangePicker placeholder="please select date range" readonly />
+			<input use:svlatepickr={{ mode: 'range' }} placeholder="please select date range" readonly />
 		</div>
 	</div>
 
 	<CodeShowBlock
-		code={`<input use:dateRangePicker placeholder="please select date range" readonly />`}
+		code={`<input use:svlatepickr={{ mode: 'range' }} placeholder="please select date range" readonly />`}
+	/>
+</div>
+<hr />
+<div style="display: flex; gap: 1rem;">
+	<div class="element-block">
+		<h3>Month Picker</h3>
+		<div>
+			<input use:svlatepickr={{ isMonthPicker: true }} placeholder="please select month" readonly />
+		</div>
+	</div>
+
+	<CodeShowBlock
+		code={`<input use:svlatepickr={{ isMonthPicker: true }} placeholder="please select month" readonly />`}
+	/>
+</div>
+<hr />
+<div style="display: flex; gap: 1rem;">
+	<div class="element-block">
+		<h3>Multiple Month Picker</h3>
+		<div>
+			<input
+				use:svlatepickr={{ mode: 'multiple', isMonthPicker: true }}
+				placeholder="please select multiple month"
+				readonly
+			/>
+		</div>
+	</div>
+
+	<CodeShowBlock
+		code={`<input use:svlatepickr={{ mode: 'multiple', isMonthPicker: true }} placeholder="please select multiple month" readonly />`}
 	/>
 </div>
 <hr />
@@ -178,18 +124,34 @@
 	<div class="element-block">
 		<h3>Month Range Picker</h3>
 		<div>
-			<input use:monthRangePicker placeholder="please select month range" readonly />
+			<input
+				use:svlatepickr={{ mode: 'range', isMonthPicker: true }}
+				placeholder="please select month range"
+				readonly
+			/>
 		</div>
 	</div>
 
 	<CodeShowBlock
-		code={`<input use:monthRangePicker placeholder="please select month range" readonly />`}
+		code={`<input use:svlatepickr={{ mode: 'range', isMonthPicker: true }} placeholder="please select month range" readonly />`}
 	/>
 </div>
 <hr />
 
+<h2 id="advances">Advances<a href="#advances" class="permalink">🔗</a></h2>
+<p>for more advances usage please check below</p>
+<ul>
+	<li><a href="/datepicker">Date picker</a></li>
+	<li><a href="/multipledatepicker">Multiple date picker</a></li>
+	<li><a href="/daterangepicker">Date Range Picker</a></li>
+	<li><a href="/monthpicker">Month Picker</a></li>
+	<li><a href="/multiplemonthpicker">Multiple Month Picker</a></li>
+	<li><a href="/monthrangepicker">Month Range Picker</a></li>
+</ul>
+<hr />
+
 <h2 id="options">Options <a href="#options" class="permalink">🔗</a></h2>
-<div style="padding:0 5rem;">
+<div style="padding-left:1rem;max-width:1000px;">
 	<table>
 		<thead>
 			<tr>
@@ -217,7 +179,9 @@
 			</tr>
 			<tr>
 				<td>altFormat</td>
-				<td>"F j, Y"</td>
+				<td style="white-space: nowrap;">
+					"F j, Y"<br />"F Y" (for monthPicker)
+				</td>
 				<td>String</td>
 				<td>Exactly the same as date format, but for the altInput field.</td>
 			</tr>
@@ -241,7 +205,9 @@
 			</tr>
 			<tr>
 				<td>ariaDateFormat</td>
-				<td>"F j, Y"</td>
+				<td style="white-space: nowrap;">
+					"F j, Y"<br />"F Y" (for monthPicker)
+				</td>
 				<td>String</td>
 				<td
 					>Defines how the date will be formatted in the aria-label for calendar days, using the
@@ -284,7 +250,9 @@
 			</tr>
 			<tr>
 				<td>dateFormat</td>
-				<td>"Y-m-d"</td>
+				<td style="white-space: nowrap;">
+					"F j, Y"<br />"F Y" (for monthPicker)
+				</td>
 				<td>String</td>
 				<td
 					>A string of characters which are used to define how the date will be displayed in the
@@ -366,6 +334,12 @@
 				<td>Boolean</td>
 				<td>Displays the calendar inline.</td>
 			</tr>
+						<tr>
+				<td>isMonthPicker</td>
+				<td>false</td>
+				<td>Boolean</td>
+				<td>Set this to `true` will change a date picker into a month picker</td>
+			</tr>
 			<tr>
 				<td>locale</td>
 				<td>"default"</td>
@@ -382,8 +356,10 @@
 				<td>null</td>
 				<td>Date | string | number</td>
 				<td
-					>The maximum date that a user can pick to (inclusive) and this will extended a maximum
-					year you can select in year dropdown if it greater than current year.
+					>The maximum date that a user can pick to (inclusive) <u
+						>and this will extended a maximum year you can select in year dropdown if it greater
+						than current year.</u
+					>
 				</td>
 			</tr>
 			<tr>
@@ -410,25 +386,18 @@
 				<td>number</td>
 				<td>Adjusts the step for the minute input (incl. scrolling).</td>
 			</tr>
-			<!-- <tr>
+			<tr>
       <td>mode</td>
       <td>"single"</td>
       <td>"single" | "multiple" | "range" | "time"</td>
       <td>Date selection mode</td>
-    </tr> -->
+    </tr>
 			<tr>
 				<td>monthSelectorType</td>
 				<td>"dropdown"</td>
 				<td>"dropdown" | "static"</td>
 				<td>How the month selector in the calendar should be shown.</td>
 			</tr>
-			<!-- <tr>
-      <td>noCalendar</td>
-      <td>false</td>
-      <td>Boolean</td>
-      <td> Hides the day selection in calendar.
-Use it along with "enableTime" to create a time picker. </td>
-    </tr> -->
 			<tr>
 				<td>position</td>
 				<td>"auto"</td>

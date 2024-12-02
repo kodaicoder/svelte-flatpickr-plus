@@ -1,10 +1,13 @@
 <script>
 	import { enhance } from '$app/forms';
-	import { dateRangePicker } from '$lib/actions.js';
+	import svlatepickr from '$lib';
 	import { Thai } from 'flatpickr_plus/dist/l10n/th.js';
-	let dateRangePickerElement, informDateRangePickerElement, myForm;
+	let dateRangePickerElement = $state(),
+		informDateRangePickerElement = $state(),
+		myForm;
 
 	const dateRangePickerOptions = {
+		mode: 'range',
 		dateFormat: 'Z',
 		altFormat: 'd M y',
 		altInput: true,
@@ -55,7 +58,7 @@
 	};
 </script>
 
-<a href="/">« Back</a>
+<a href="/#advances">« Back</a>
 <h1>Date Range Picker</h1>
 
 <section>
@@ -63,15 +66,15 @@
 	<br />
 	<input
 		name="normalDateRangePicker"
-		use:dateRangePicker={dateRangePickerOptions}
-		on:change={handleChange}
+		use:svlatepickr={dateRangePickerOptions}
+		onchange={handleChange}
 	/>
 </section>
 <br />
 <section>
 	<label for="normalDateRangePickerDefaultDate">Date Range Picker with initial date: </label>
 	<br />
-	<input name="normalDateRangePickerDefaultDate" use:dateRangePicker={defaultDateRangeOptions} />
+	<input name="normalDateRangePickerDefaultDate" use:svlatepickr={defaultDateRangeOptions} />
 </section>
 <br />
 <section>
@@ -79,16 +82,16 @@
 	<br />
 	<input
 		name="normalDateRangePickerBind"
-		use:dateRangePicker={dateRangePickerOptions}
+		use:svlatepickr={dateRangePickerOptions}
 		bind:this={dateRangePickerElement}
 	/>
-	<button type="button" on:click={handleDateRangePickerBindClick}>Clear</button>
+	<button type="button" onclick={handleDateRangePickerBindClick}>Clear</button>
 </section>
 <br />
 <section>
 	<label for="withWrapperDateRangePicker">Date Range Picker with wrapper</label>
 	<br />
-	<div use:dateRangePicker={wrapDateRangePickerOptions}>
+	<div use:svlatepickr={wrapDateRangePickerOptions}>
 		<input name="withWrapperDateRangePicker" data-input />
 		<button type="button" title="toggle" data-toggle> toggle </button>
 		<button type="button" title="clear" data-clear> clear </button>
@@ -101,13 +104,13 @@
 	<section>
 		<label for="dateRangePicker1">Date Range Picker: </label>
 		<br />
-		<input name="dateRangePicker1" use:dateRangePicker={dateRangePickerOptions} />
+		<input name="dateRangePicker1" use:svlatepickr={dateRangePickerOptions} />
 	</section>
 	<br />
 	<section>
 		<label for="dateRangePicker2">Date Range Picker with initial date: </label>
 		<br />
-		<input name="dateRangePicker2" use:dateRangePicker={defaultDateRangeOptions} />
+		<input name="dateRangePicker2" use:svlatepickr={defaultDateRangeOptions} />
 	</section>
 	<br />
 	<section>
@@ -115,16 +118,16 @@
 		<br />
 		<input
 			name="dateRangePicker3"
-			use:dateRangePicker={dateRangePickerOptions}
+			use:svlatepickr={dateRangePickerOptions}
 			bind:this={informDateRangePickerElement}
 		/>
-		<button type="button" on:click={handleDateRangePickerInFromBindClick}>Clear</button>
+		<button type="button" onclick={handleDateRangePickerInFromBindClick}>Clear</button>
 	</section>
 	<br />
 	<section>
 		<label for="dateRangePicker4">Date Range Picker with wrapper</label>
 		<br />
-		<div use:dateRangePicker={wrapDateRangePickerOptions}>
+		<div use:svlatepickr={wrapDateRangePickerOptions}>
 			<input name="dateRangePicker4" data-input />
 			<button type="button" title="toggleInFrom" data-toggle> toggle </button>
 			<button type="button" title="clearInFrom" data-clear> clear </button>
@@ -137,3 +140,4 @@
 	</div>
 	<br />
 </form>
+<a href="/#advances" style="display:block;margin-top:1rem;">« Back to Main page</a>

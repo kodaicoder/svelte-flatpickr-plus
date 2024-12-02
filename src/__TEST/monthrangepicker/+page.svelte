@@ -1,10 +1,14 @@
 <script>
 	import { enhance } from '$app/forms';
-	import { monthRangePicker } from '$lib/actions.js';
+	import svlatepickr from '$lib';
 	import { Thai } from 'flatpickr_plus/dist/l10n/th.js';
-	let monthRangePickerElement, informMonthRangePickerElement, myForm;
+	let monthRangePickerElement = $state(),
+		informMonthRangePickerElement = $state(),
+		myForm;
 
 	const monthRangePickerOptions = {
+		isMonthPicker: true,
+		mode: 'range',
 		dateFormat: 'Z',
 		altFormat: 'F Y',
 		altInput: true,
@@ -55,7 +59,7 @@
 	};
 </script>
 
-<a href="/">« Back</a>
+<a href="/#advances">« Back</a>
 <h1>Month Range Picker</h1>
 
 <section>
@@ -63,15 +67,15 @@
 	<br />
 	<input
 		name="normalMonthRangePicker"
-		use:monthRangePicker={monthRangePickerOptions}
-		on:change={handleChange}
+		use:svlatepickr={monthRangePickerOptions}
+		onchange={handleChange}
 	/>
 </section>
 <br />
 <section>
 	<label for="normalMonthRangePickerDefaultDate">Month Range Picker with initial date: </label>
 	<br />
-	<input name="normalMonthRangePickerDefaultDate" use:monthRangePicker={defaultDateRangeOptions} />
+	<input name="normalMonthRangePickerDefaultDate" use:svlatepickr={defaultDateRangeOptions} />
 </section>
 <br />
 <section>
@@ -81,16 +85,16 @@
 	<br />
 	<input
 		name="normalMonthRangePickerBind"
-		use:monthRangePicker={monthRangePickerOptions}
+		use:svlatepickr={monthRangePickerOptions}
 		bind:this={monthRangePickerElement}
 	/>
-	<button type="button" on:click={handleMonthRangePickerBindClick}>Clear</button>
+	<button type="button" onclick={handleMonthRangePickerBindClick}>Clear</button>
 </section>
 <br />
 <section>
 	<label for="withWrapperMonthRangePicker">Month Range Picker with wrapper</label>
 	<br />
-	<div use:monthRangePicker={wrapMonthRangePickerOptions}>
+	<div use:svlatepickr={wrapMonthRangePickerOptions}>
 		<input name="withWrapperMonthRangePicker" data-input />
 		<button type="button" title="toggle" data-toggle> toggle </button>
 		<button type="button" title="clear" data-clear> clear </button>
@@ -103,13 +107,13 @@
 	<section>
 		<label for="monthRangePicker1">Month Range Picker: </label>
 		<br />
-		<input name="monthRangePicker1" use:monthRangePicker={monthRangePickerOptions} />
+		<input name="monthRangePicker1" use:svlatepickr={monthRangePickerOptions} />
 	</section>
 	<br />
 	<section>
 		<label for="monthRangePicker2">Month Range Picker with initial month: </label>
 		<br />
-		<input name="monthRangePicker2" use:monthRangePicker={defaultDateRangeOptions} />
+		<input name="monthRangePicker2" use:svlatepickr={defaultDateRangeOptions} />
 	</section>
 	<br />
 	<section>
@@ -117,16 +121,16 @@
 		<br />
 		<input
 			name="monthRangePicker3"
-			use:monthRangePicker={monthRangePickerOptions}
+			use:svlatepickr={monthRangePickerOptions}
 			bind:this={informMonthRangePickerElement}
 		/>
-		<button type="button" on:click={handleMonthRangePickerInFromBindClick}>Clear</button>
+		<button type="button" onclick={handleMonthRangePickerInFromBindClick}>Clear</button>
 	</section>
 	<br />
 	<section>
 		<label for="monthRangePicker4">Month Range Picker with wrapper</label>
 		<br />
-		<div use:monthRangePicker={wrapMonthRangePickerOptions}>
+		<div use:svlatepickr={wrapMonthRangePickerOptions}>
 			<input name="monthRangePicker4" data-input />
 			<button type="button" title="toggleInFrom" data-toggle> toggle </button>
 			<button type="button" title="clearInFrom" data-clear> clear </button>
@@ -139,3 +143,4 @@
 	</div>
 	<br />
 </form>
+<a href="/#advances" style="display:block;margin-top:1rem;">« Back to Main page</a>

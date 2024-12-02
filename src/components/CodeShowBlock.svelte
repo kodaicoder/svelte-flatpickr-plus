@@ -1,6 +1,6 @@
 <script>
-	export let title = 'Code';
-	export let code;
+	/** @type {{title?: string, code: any}} */
+	let { title = 'Code', code, hideTitle = false, ...rest } = $props();
 
 	async function copyCode(ev) {
 		await navigator.clipboard.writeText(code);
@@ -20,12 +20,14 @@
 	}
 </script>
 
-<div>
-	<div style="display:flex;align-items:center;">
-		<h3>{title}</h3>
-		<button class="copy-button" on:click={copyCode}>Copy</button>
-	</div>
+<div style={rest.style}>
+	{#if !hideTitle}
+		<div style="display:flex;align-items:center;padding-bottom:0.5rem;">
+			<h3>{title}</h3>
+		</div>
+	{/if}
 	<div class="code-show-block">
+		<button class="copy-button" onclick={copyCode}>Copy</button>
 		<code><pre>{code}</pre></code>
 	</div>
 </div>

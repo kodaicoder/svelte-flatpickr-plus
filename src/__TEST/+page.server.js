@@ -1,4 +1,4 @@
-/** @type {import('./$types').Actions} */
+/** @type {import('../routes/guide/$types.js').Actions} */
 export const actions = {
 	default: async ({ request }) => {
 		//! Form Data
