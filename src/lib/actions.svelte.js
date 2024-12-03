@@ -1,14 +1,8 @@
-import flatpickr from '../../../../flatpickr_-locale_year/src'
-import yearDropdownPlugin from '../../../../flatpickr_-locale_year/src/plugins/yearDropdown';
-import monthSelectPlugin from '../../../../flatpickr_-locale_year/src/plugins/monthSelect';
-import '../../../../flatpickr_-locale_year/dist/flatpickr.css';
-import '../../../../flatpickr_-locale_year/dist/plugins/monthSelect/style.css';
-
-// import flatpickr from 'flatpickr_plus';
-// import yearDropdownPlugin from 'flatpickr_plus/dist/plugins/yearDropdown';
-// import monthSelectPlugin from 'flatpickr_plus/dist/plugins/monthSelect';
-// import 'flatpickr_plus/dist/flatpickr.css';
-// import 'flatpickr_plus/dist/plugins/monthSelect/style.css';
+import flatpickr from 'flatpickr_plus';
+import yearDropdownPlugin from 'flatpickr_plus/dist/plugins/yearDropdown';
+import monthSelectPlugin from 'flatpickr_plus/dist/plugins/monthSelect';
+import 'flatpickr_plus/dist/flatpickr.css';
+import 'flatpickr_plus/dist/plugins/monthSelect/style.css';
 
 /**
  * Represents a date option that can be either a Date object, a string, or a number.
@@ -109,6 +103,8 @@ import '../../../../flatpickr_-locale_year/dist/plugins/monthSelect/style.css';
  * @property {boolean} [resetToDefault] - Handling reset and selected a default date.
  */
 
+const endDayOfNextYear = new Date(new Date().getFullYear() + 1, 11, 31);
+
 /** @type {FlatpickrOptions} */
 const defaultOptions = {
     allowInput: true,
@@ -134,6 +130,7 @@ const defaultOptions = {
     inline: false,
     isMonthPicker: false,
     locale: "default",
+    maxDate: endDayOfNextYear,
     minuteIncrement: 5,
     mode: "single",
     monthSelectorType: "dropdown",
@@ -191,21 +188,23 @@ function removeOn(hook) {
 
 function modifyHooks(opts = {}, node) {
     opts = Object.assign({}, opts);
+    // console.log(node.name, node);
     for (const hook of hooks) {
         //create custom event and adding detail as a flatpickr data
-        const eventFirer = (selectedDates, dateStr, instance) => {
-            const dispatchEvent = new CustomEvent(removeOn(hook), {
-                detail: { selectedDates, dateStr, instance }
-            });
-            node.dispatchEvent(dispatchEvent);
-        };
-        if (hook in opts) {
-            // modify hook to be array
-            if (!Array.isArray(opts[hook])) opts[hook] = [opts[hook]];
-            opts[hook].unshift(eventFirer);
-        } else {
-            opts[hook] = [eventFirer];
-        }
+        // const eventFirer = (selectedDates, dateStr, instance) => {
+        //     const dispatchEvent = new CustomEvent(removeOn(hook), {
+        //         detail: { selectedDates, dateStr, instance }
+        //     });
+        //     node.dispatchEvent(dispatchEvent);
+        // };
+        if (!Array.isArray(opts[hook])) opts[hook] = [opts[hook]];
+        // if (hook in opts) {
+        //     // modify hook to be array
+        //     // if (!Array.isArray(opts[hook])) opts[hook] = [opts[hook]];
+        //     opts[hook].unshift(eventFirer);
+        // } else {
+        //     opts[hook] = [eventFirer];
+        // }
     }
     return opts;
 }
@@ -217,9 +216,6 @@ function resetFlatpickr(event, fp, opts) {
     if (opts.defaultDate && opts.resetToDefault)
         event.preventDefault();
 }
-
-
-let instance;
 
 function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [yearDropdownPlugin()]) {
     node.setAttribute('autocomplete', 'off');
@@ -274,9 +270,10 @@ function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [yearDropd
     });
 
     if (opts.wrap)
-        node.querySelector('input').form?.addEventListener('reset', resetFlatpickr(fp, opts));
+        node.querySelector('input').form?.addEventListener('reset', (ev) => resetFlatpickr(ev, fp, opts));
     else
-        node.form?.addEventListener('reset', resetFlatpickr(fp, opts));
+        node.form?.addEventListener('reset', (ev) => resetFlatpickr(ev, fp, opts));
+
     return fp;
 }
 
@@ -284,14 +281,19 @@ function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [yearDropd
 const datePicker = (node, options) => {
     options = { ...defaultOptions, ...options };
     const opts = modifyHooks(options, node);
-    instance = attachFlatpickr(node, opts);
+    // const optsRemoveDefault = { ...opts, defaultDate: [] }
+    const instance = attachFlatpickr(node, opts);
 
-    return {
-        destroy() {
+    $effect(() => {
+        if (opts.defaultDate) {
+            const event = new Event('input');
+            node.dispatchEvent(event);
+        }
+        return () => {
             instance.destroy();
-            instance._input?.form?.removeEventListener('reset', resetFlatpickr(fp, opts));
-        },
-    };
+            instance._input?.form?.removeEventListener('reset', (ev) => resetFlatpickr(ev, instance, opts));
+        };
+    });
 }
 
 /** @type {import('svelte/action').Action} */
@@ -307,14 +309,18 @@ const monthPicker = (node, options) => {
             }),
             yearDropdownPlugin(),
         ]
-    instance = attachFlatpickr(node, opts, monthPlugins);
+    const instance = attachFlatpickr(node, opts, monthPlugins);
+    $effect(() => {
+        if (opts.defaultDate) {
+            const event = new Event('input');
+            node.dispatchEvent(event);
+        }
 
-    return {
-        destroy() {
+        return () => {
             instance.destroy();
-            instance._input?.form?.removeEventListener('reset', resetFlatpickr(fp, opts));
-        },
-    };
+            instance._input?.form?.removeEventListener('reset', (ev) => resetFlatpickr(ev, instance, opts));
+        };
+    });
 }
 
 /** @type {import('svelte/action').Action} */
@@ -323,12 +329,11 @@ export default function (node, options = defaultOptions) {
         options = {
             ...defaultMonthOptions, ...options
         }
-        return monthPicker(node, options);
+        monthPicker(node, options);
     } else {
         options = {
             ...defaultOptions, ...options
         }
-        return datePicker(node, options);
+        datePicker(node, options);
     }
-
 }

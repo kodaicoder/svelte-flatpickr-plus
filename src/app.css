@@ -19,6 +19,9 @@ body {
 		padding-left: 8vw !important;
 	}
 }
+mark {
+	background-color: rgba(252, 255, 149, 1);
+}
 
 .sub-nav div:nth-child(2) {
 	display: none;
