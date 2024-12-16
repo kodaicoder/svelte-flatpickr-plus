@@ -354,7 +354,7 @@ you can check all supported hooks name [here](https://flatpickr.js.org/events/#h
 With `onchange` event you can not access to `detail` object because  
 `onchange` event itself is a DOM Native Event that cannot modify and adding `detail` object.
 By the way you can using `onvalueupdate` event instead to access to `detail` object from callback Event data
-or you can using [hooks](./#Hooks-date-picker) approach instead
+or you can using [hooks](./#Hooks) approach instead
 :::
 
 ```svelte title=".svelte" ln
