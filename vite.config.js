@@ -25,7 +25,8 @@ export default defineConfig({
 					'tear-off-calendar',
 					'downwards-button',
 					'repeat-button',
-					'information'],
+					'information',
+					'artist-palette'],
 
 			},
 		}),

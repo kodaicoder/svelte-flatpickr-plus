@@ -77,3 +77,31 @@ With a month range picker you need to adding options object with `isMonthPicker:
 
 <input use:svlatepickr={options} /> // [svp! ++]
 ```
+
+### Theme Changer
+
+Before user should import it from `flatpickr_plus/dist/plugins/themeChanger` for now has been renamed into `themeChanger` and can be imported from  
+`svelte-flatpickr-plus` directly and you can get a correct theme name from  
+`themeNames` object that you can import from the same directory.
+
+```svelte title=".svelte"
+<script>
+	import fpThemeChanger from 'flatpickr_plus/dist/plugins/themeChanger'; // [svp! --]
+	import { themeChanger, themeNames } from 'svelte-flatpickr-plus'; // [svp! ++]
+
+	let themeName = $state(themeNames.default); // [svp! ++]
+	
+	onMount(() => // [svp! --]{
+		if (theme) // [svp! --]{
+			const flatpickrThemePath = 'node_modules/flatpickr_plus/dist/themes/';// [svp! --]
+			fpThemeChanger(themeName, flatpickrThemePath);// [svp! --]
+		}// [svp! --]
+	});// [svp! --]
+
+	$effect(async () => {
+		if (themeName) {
+			themeChanger(themeName); // [svp! ++]
+		}
+	});
+</script>
+```

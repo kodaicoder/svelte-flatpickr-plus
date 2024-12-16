@@ -35,4 +35,10 @@ features:
       type: iconify
       collection: twemoji
       name: repeat-button
+  - title: Theme Changer
+    description: Easier way to change a theme of your date picker.
+    icon:
+      type: iconify
+      collection: twemoji
+      name: artist-palette
 ---

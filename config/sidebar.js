@@ -84,6 +84,16 @@ export default {
                     to: '/guide/advance-usage/month-range-picker/',
                 },
             ],
+        },
+        {
+            title: 'Themes',
+            collapsible: true,
+            items: [
+                {
+                    title: 'Using themeChanger',
+                    to: '/guide/themes',
+                },
+            ]
         }
     ],
 }
