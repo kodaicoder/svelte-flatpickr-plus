@@ -13,6 +13,8 @@ title: Basic usage of Date range picker
 ```svelte title=".svelte"
 <script>
 	import svlatepickr from 'svelte-flatpickr-plus';
+
+	/** @type {import('$lib/types').FlatpickrOptions} */
 	const options = {
 		mode: 'range'
 	};

@@ -2,6 +2,10 @@
 title: Options
 ---
 
+:::tip[type support]
+You can import a type from `svelte-flatpickr-plus/types` by default it will export all options in a table below, for additional you can import `Hook` type for using it in callback of hook or event
+:::
+
 :::important[Year dropdown default]{icon=twemoji:information}
 By default a year dropdown will set maximum year as next year
 :::
@@ -10,7 +14,7 @@ In this page will have all options that you can passing into a action that you i
 
 | Config Option         | Default                                        | Type                                                                                                                                                         | Description                                                                                                                                                                                                               |
 | :-------------------- | :--------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| allowInput            | true                                           | Boolean                                                                                                                                                      | Allows the user to enter a date directly input the input field. By default, direct entry is disabled.                                                                                                                     |
+| allowInput            | false                                          | Boolean                                                                                                                                                      | Allows the user to enter a date directly input the input field. By default, direct entry is disabled.                                                                                                                     |
 | allowInvalidPreload   | false                                          | Boolean                                                                                                                                                      | Allow preloading of invalid date.                                                                                                                                                                                         |
 | altFormat             | "F j, Y" / "F Y" (for monthPicker)             | String                                                                                                                                                       | Exactly the same as date format, but for the altInput field.                                                                                                                                                              |
 | altInput              | false                                          | Boolean                                                                                                                                                      | Show the user a readable date (as per altFormat), but return something totally different to the server.                                                                                                                   |

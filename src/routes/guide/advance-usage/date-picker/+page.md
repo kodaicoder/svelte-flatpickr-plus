@@ -22,12 +22,13 @@ title: Advance usage of Date picker
 		clearBehaviorDateElement,
 		wrapDateValue=$state(),
 		localizeDateValue=$state(),
-		informDatePickerElement;
+		informDatePickerElement,
+		formDataJSON=$state();
 
     const todayDate = new Date();
 
     const dateFormatOptions ={
-        dateFormat: 'Z'
+        dateFormat: 'Z' /*set as ISO Date format**/
     }
 
     const altInputOptions = {
@@ -113,8 +114,8 @@ title: Advance usage of Date picker
     	console.log('event close!');
     };
 
-	const beforeSubmitHandler = ({ formElement, formData, action, cancel, submitter }) => {
-		console.log(formDataToJson(formData));
+	const beforeSubmitHandler = ({ formElement, formData,  cancel }) => {
+		formDataJSON = formDataToJson(formData)
 		cancel();
 		formElement.reset();
 	}
@@ -133,7 +134,7 @@ You can check supported date format characters [here](https://flatpickr.js.org/f
 <script>
 	import svlatepickr from 'svelte-flatpickr-plus';
 	const options = {
-		dateFormat: 'Z' // [svp! ++]
+		dateFormat: 'Z' /*set as ISO Date format**/ // [svp! ++]
 	};
 </script>
 
@@ -150,7 +151,7 @@ Value:
 
 ## Alt input
 
-change the date format as you like but not affect a real value
+change the date format as you like , unaffected a real value
 
 :::tip[Support Format]
 You can check supported date format characters [here](https://flatpickr.js.org/formatting/)
@@ -160,7 +161,7 @@ You can check supported date format characters [here](https://flatpickr.js.org/f
 <script>
 	import svlatepickr from 'svelte-flatpickr-plus';
 	const options = {
-		dateFormat: 'Z',
+		dateFormat: 'Z' /*set as ISO Date format**/,
 		altInput: true, // [svp! ++]
 		altFormat: 'd F Y' // [svp! ++]
 	};
@@ -177,7 +178,7 @@ Value:
 
 {altInputValue ?? 'Please select date from above input.'}
 
-## Default date
+## Set default date
 
 Set a default date to input after component is mounted
 
@@ -186,14 +187,14 @@ Set a default date to input after component is mounted
 	import svlatepickr from 'svelte-flatpickr-plus';
 	const todayDate = new Date(); // [svp! ++]
 	const options = {
-		dateFormat: 'Z',
+		dateFormat: 'Z' /*set as ISO Date format**/,
 		altInput: true,
 		altFormat: 'd F Y',
-		defaultDate: new Date() /**Set Default date to today*/ // [svp! ++]
+		defaultDate: new Date() /**Set default date date to today*/ // [svp! ++]
 	};
 </script>
 
-<input name="altInput" use:svlatepickr={options} />
+<input name="defaultDate" use:svlatepickr={options} />
 ```
 
 Result:
@@ -204,7 +205,7 @@ Value:
 
 {defaultDateValue ?? 'Please select date from above input.'}
 
-## Min/Max date
+## Set min/max date
 
 Set a min/max date to a date picker
 
@@ -213,7 +214,7 @@ Set a min/max date to a date picker
 	import svlatepickr from 'svelte-flatpickr-plus';
 	const todayDate = new Date(); // [svp! ++]
 	const options = {
-		dateFormat: 'Z',
+		dateFormat: 'Z' /*set as ISO Date format**/,
 		altInput: true,
 		altFormat: 'd F Y',
 		minDate: new Date().setDate(todayDate.getDate() - 5) /*set min date to 5 day ago**/, // [svp! ++]
@@ -232,7 +233,7 @@ Value:
 
 {minMaxDateValue ?? 'Please select date from above input.'}
 
-## Disable date
+## Set disable date
 
 Disable any date in calendar
 
@@ -241,7 +242,7 @@ Disable any date in calendar
 	import svlatepickr from 'svelte-flatpickr-plus';
     const todayDate = new Date(); // [svp! ++]
 	const options = {
-		dateFormat: 'Z',
+		dateFormat: 'Z' /*set as ISO Date format**/,
 		altInput: true,
 		altFormat: 'd F Y',
 		// [svp! ++]disable: [
@@ -262,7 +263,7 @@ Value:
 
 {disableDateValue ?? 'Please select date from above input.'}
 
-## Hooks date picker
+## Hooks
 
 Build a date picker with hooks options
 
@@ -274,7 +275,7 @@ You can check all supported hooks name [here](https://flatpickr.js.org/events/#h
 <script>
 	import svlatepickr from 'svelte-flatpickr-plus';
 	const options = {
-		dateFormat: 'Z',
+		dateFormat: 'Z' /*set as ISO Date format**/,
 		altInput: true,
 		altFormat: 'd F Y',
 		// [svp! ++]onChange: (selectedDates, dateStr) => {
@@ -304,19 +305,18 @@ Value:
 
 ## Listen to events
 
-Listen to event of the date picker from input and with that you can get
+Listen to event of the date picker from input and with that you can get  
 `selectedDates`, `dateStr` or `instance` data with `detail` object from callback Event data
 
 :::tip[Events]
-All supported events name is just like as hooks name but in **_all lower case letter_**.
-
+All supported events name is just like as hooks name but in **_all lower case_**.  
 you can check all supported hooks name [here](https://flatpickr.js.org/events/#hooks)
 :::
 
-:::warning[ onchange event ]
-With `onchange` event you can not access to `detail` object because `onchange` event itself is a DOM Native Event that cannot modify and adding `detail` object,
-
-by the way you can using `onvalueupdate` event instead to access to `detail` object from callback Event data
+:::caution[ onchange event ]
+With `onchange` event you can not access to `detail` object because  
+`onchange` event itself is a DOM Native Event that cannot modify and adding `detail` object.
+By the way you can using `onvalueupdate` event instead to access to `detail` object from callback Event data
 or you can using [hooks](./#Hooks-date-picker) approach instead
 :::
 
@@ -324,7 +324,7 @@ or you can using [hooks](./#Hooks-date-picker) approach instead
 <script>
 	import svlatepickr from 'svelte-flatpickr-plus';
 	const options = {
-		dateFormat: 'Z',
+		dateFormat: 'Z' /*set as ISO Date format**/,
 		altInput: true,
 		altFormat: 'd F Y'
 	};
@@ -380,7 +380,7 @@ With access to instance of flatpickr you can using any properties and method tha
 	import svlatepickr from 'svelte-flatpickr-plus';
 	let datePickerElement; // [svp! ++]
 	const options = {
-		dateFormat: 'Z',
+		dateFormat: 'Z' /*set as ISO Date format**/,
 		altInput: true,
 		altFormat: 'd F Y'
 	};
@@ -412,7 +412,7 @@ Control on `.clear()` behavior with `resetMoveDefault` and `resetToDefault` in o
 
 :::info[resetMoveDefault]
 with `resetMoveDefault` as `true` (by default) while instance of date picker got reset with `.clear()`
-it will move a date in calendar to a default (or today date if `defaultDate` not set in options), if it set to `false` this the calendar will stay on a latest position of a date before.
+it will move calendar to a default (or today date if `defaultDate` not set in options), if it set to `false` this the calendar will stay on a latest position of a date before.
 :::
 
 :::info[resetToDefault]
@@ -425,7 +425,7 @@ a value in input DOM will be reset back to a default date (or empty string if it
 	import svlatepickr from 'svelte-flatpickr-plus';
 	const todayDate = new Date();
 	const options = {
-		dateFormat: 'Z',
+		dateFormat: 'Z' /*set as ISO Date format**/,
 		altInput: true,
 		altFormat: 'd F Y',
 		defaultDate: new Date(),
@@ -462,7 +462,7 @@ The selector for flatpickr should be the wrapping div with class
 	import svlatepickr from 'svelte-flatpickr-plus';
 
 	const options = {
-		dateFormat: 'Z',
+		dateFormat: 'Z' /*set as ISO Date format**/,
 		altInput: true,
 		altFormat: 'd F Y',
 		wrap: true // [svp! ++]
@@ -509,7 +509,7 @@ If your localize file giving wrong locale year please let me know by open a issu
 	const thaiLocale = l10n.th; // [svp! ++]
 
 	const options = {
-		dateFormat: 'Z',
+		dateFormat: 'Z' /*set as ISO Date format**/,
 		altInput: true,
 		altFormat: 'd F Y',
 		locale: thaiLocale, // [svp! ++]
@@ -530,13 +530,83 @@ Value:
 
 ## Using in form action
 
-Checking the usage and action on the server side in [this REPL](https://www.sveltelab.dev/tn5l4ht64wch792)
+```svelte title=".svelte" ln
+<script>
+	import svlatepickr from 'svelte-flatpickr-plus';
+	// [svp! ++]import {formDataToJson} from '$lib/utils.js'
+	// [svp! ++] let informDatePickerElement;
+	// [svp! ++] const altInputOptions = {
+	// [svp! ++]	dateFormat: 'Z' /*set as ISO Date format**/,
+	// [svp! ++]	altInput: true,
+	// [svp! ++]	altFormat: 'd F Y',
+	// [svp! ++] };
+	// [svp! ++] const defaultDateOptions ={
+	// [svp! ++]	...altInputOptions,
+	// [svp! ++]	defaultDate: new Date()
+	// [svp! ++]}
+	// [svp! ++] const wrapOptions ={
+	// [svp! ++]	...altInputOptions,
+	// [svp! ++]	wrap: true
+	// [svp! ++] }
+
+	// [svp! ++] const beforeSubmitHandler = ({ formElement, formData, cancel }) => {
+	// [svp! ++]	formDataJSON = formDataToJson(formData)
+	// [svp! ++]	cancel();
+	// [svp! ++]	formElement.reset();
+	// [svp! ++] }
+</script>
+
+// [svp! ++]<form name="datePickerForm" method="POST" use:enhance={beforeSubmitHandler} >
+// [svp! ++]	<section>
+// [svp! ++]		<label for="datePicker_1">Date picker:
+// [svp! ++]		<br />
+// [svp! ++]		<input name="datePicker_1" use:svlatepickr={altInputOptions}>
+// [svp! ++]	</section>
+// [svp! ++]	<br />
+// [svp! ++]	<section>
+// [svp! ++]		<label for="datePicker_2">Date picker with initial date: </label>
+// [svp! ++]		<br />
+// [svp! ++]		<input id="datePicker_2" name="datePicker_2" use:svlatepickr={defaultDateOptions} />
+// [svp! ++]	</section>
+// [svp! ++]	<br />
+// [svp! ++]	<section>
+// [svp! ++]		<label for="datePicker_3"> Date picker with flatpickr element binding: </label>
+// [svp! ++]		<br />
+// [svp! ++]		<input
+// [svp! ++]			id="datePicker_3"
+// [svp! ++]			name="datePicker_3"
+// [svp! ++]			bind:this={informDatePickerElement}
+// [svp! ++]			use:svlatepickr={defaultDateOptions}
+// [svp! ++]		/>
+// [svp! ++]		<button type="button" onclick={()=>{informDatePickerElement._flatpickr.clear()}}>
+// [svp! ++]			Clear
+// [svp! ++]		</button>
+// [svp! ++]	</section>
+// [svp! ++]	<br />
+// [svp! ++]	<section>
+// [svp! ++]		<label for="datePicker_4">Date picker with wrapper</label>
+// [svp! ++]		<br />
+// [svp! ++]		<div use:svlatepickr={wrapOptions}>
+// [svp! ++]			<input id="datePicker_4" name="datePicker_4" data-input />
+// [svp! ++]			<button type="button" title="toggleInFrom" data-toggle> toggle </button>
+// [svp! ++]			<button type="button" title="clearInFrom" data-clear> clear </button>
+// [svp! ++]		</div>
+// [svp! ++]	</section>
+// [svp! ++]	<br />
+// [svp! ++]	<div>
+// [svp! ++]		<div>
+// [svp! ++]			<button type="submit" >Submit</button>
+// [svp! ++]			<button type="reset">Reset</button>
+// [svp! ++]		</div>
+// [svp! ++]	</div>
+// [svp! ++]</form>
+```
 
 Result :
 
-<form method="POST" use:enhance={beforeSubmitHandler} >
+<form name="datePickerForm" method="POST" use:enhance={beforeSubmitHandler} >
 	<section>
-		<label for="datePicker_1">Date picker: </label>
+		<label for="datePicker_1">Date picker:
 		<br />
 		<input name="datePicker_1" use:svlatepickr={altInputOptions}>
 	</section>
@@ -544,13 +614,14 @@ Result :
 	<section>
 		<label for="datePicker_2">Date picker with initial date: </label>
 		<br />
-		<input name="datePicker_2" use:svlatepickr={defaultDateOptions} />
+		<input id="datePicker_2" name="datePicker_2" use:svlatepickr={defaultDateOptions} />
 	</section>
 	<br />
 	<section>
 		<label for="datePicker_3"> Date picker with flatpickr element binding: </label>
 		<br />
 		<input
+			id="datePicker_3"
 			name="datePicker_3"
 			bind:this={informDatePickerElement}
 			use:svlatepickr={defaultDateOptions}
@@ -562,17 +633,20 @@ Result :
 		<label for="datePicker_4">Date picker with wrapper</label>
 		<br />
 		<div use:svlatepickr={wrapOptions}>
-			<input name="datePicker_4" data-input />
+			<input id="datePicker_4" name="datePicker_4" data-input />
 			<button type="button" title="toggleInFrom" data-toggle> toggle </button>
 			<button type="button" title="clearInFrom" data-clear> clear </button>
 		</div>
 	</section>
 	<br />
 	<div>
-		<mark>open developer tools and checking console for JSON created from formData</mark>
 		<div>
 			<button type="submit" >Submit</button>
 			<button type="reset">Reset</button>
 		</div>
 	</div>
 </form>
+
+Form data JSON:
+
+{ formDataJSON ??'Please submit form above'}

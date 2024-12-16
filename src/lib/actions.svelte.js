@@ -33,6 +33,22 @@ import 'flatpickr_plus/dist/plugins/monthSelect/style.css';
  * @typedef {"onChange" | "onClose" | "onDayCreate" | "onDestroy" | "onKeyDown" | "onMonthChange" | "onOpen" | "onParseConfig" | "onReady" | "onValueUpdate" | "onYearChange" | "onPreCalendarPosition"} HookKey
  */
 /**
+ * Represent a Event name for flatpikr attribute can listen
+ * @typedef {"onchange" | "onclose" | "ondaycreate" | "ondestroy" | "onkeydown" | "onmonthchange" | "onopen" | "onparseconfig" | "onready" | "onvalueupdate" | "onyearchange" | "onprecalendarposition"} EventKey
+ * @property {function} [onchange] - Fires when the selected dates have changed, either when a date is picked or cleared, by the user or programmatically.
+ * @property {function} [onclose] - Fires when the calendar is closed.
+ * @property {function} [ondaycreate] - Fires for every day cell in the calendar, where the fourth argument is the HTML element of the cell. See https://chmln.github.io/flatpickr/events/#ondaycreate
+ * @property {function} [ondestroy] - Fires before the calendar instance is destroyed.
+ * @property {function} [onkeydown] - Fires when valid keyboard input for the calendar is detected.
+ * @property {function} [onmonthchange] - Fires after the month has changed.
+ * @property {function} [onopen] - Fires after the calendar is opened.
+ * @property {function} [onparseconfig] - Fires after the configuration for the calendar is parsed.
+ * @property {function} [onready] - Fires once the calendar instance is ready.
+ * @property {function} [onvalueupdate] - Like onChange, but fires immediately after any date changes.
+ * @property {function} [onyearchange] - Fires after the year has changed.
+ * @property {function} [onprecalendarposition] - Fires before the calendar position is calculated.
+*/
+/**
  * @typedef {Object} FlatpickrOptions
  * @property {boolean}  [allowInput]  - Allows the user to enter a date directly into the input field. By default, direct entry is disabled.
  * @property {boolean} [allowInvalidPreload] - Allow preloading of an invalid date.
@@ -107,7 +123,7 @@ const endDayOfNextYear = new Date(new Date().getFullYear() + 1, 11, 31);
 
 /** @type {FlatpickrOptions} */
 const defaultOptions = {
-    allowInput: true,
+    allowInput: false,
     allowInvalidPreload: false,
     altFormat: "F j, Y",
     altInput: false,
@@ -182,46 +198,42 @@ const hooks = [
     'onValueUpdate'
 ];
 
-function removeOn(hook) {
-    return hook.charAt(2).toLowerCase() + hook.substring(3);
-}
-
-function modifyHooks(opts = {}, node) {
+/**
+ * @param {FlatpickrOptions} opts
+ * @returns {FlatpickrOptions}
+ */
+function modifyHooks(opts = {}) {
     opts = Object.assign({}, opts);
-    // console.log(node.name, node);
     for (const hook of hooks) {
-        //create custom event and adding detail as a flatpickr data
-        // const eventFirer = (selectedDates, dateStr, instance) => {
-        //     const dispatchEvent = new CustomEvent(removeOn(hook), {
-        //         detail: { selectedDates, dateStr, instance }
-        //     });
-        //     node.dispatchEvent(dispatchEvent);
-        // };
         if (!Array.isArray(opts[hook])) opts[hook] = [opts[hook]];
-        // if (hook in opts) {
-        //     // modify hook to be array
-        //     // if (!Array.isArray(opts[hook])) opts[hook] = [opts[hook]];
-        //     opts[hook].unshift(eventFirer);
-        // } else {
-        //     opts[hook] = [eventFirer];
-        // }
     }
     return opts;
 }
 
+/**
+ * @param {Event|CustomEvent} event
+ * @param {*} fp
+ * @param {FlatpickrOptions} opts
+ */
 function resetFlatpickr(event, fp, opts) {
     fp.clear();
-    //prevent further actual reset form event
-    //to prevent a data in input got clear again
     if (opts.defaultDate && opts.resetToDefault)
         event.preventDefault();
 }
 
+/**
+ * 
+ * @param {HTMLInputElement} node 
+ * @param {FlatpickrOptions} opts 
+ * @param {[*]} plugins 
+ * @returns 
+ */
 function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [yearDropdownPlugin()]) {
     node.setAttribute('autocomplete', 'off');
     if (!opts.allowInput) {
         node.setAttribute('readonly', 'true');
     }
+    /** @type {import('flatpickr_plus').flatpickr.Instance} */
     const fp = flatpickr(node, {
         ...opts,
         onOpen: [
@@ -277,11 +289,10 @@ function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [yearDropd
     return fp;
 }
 
-/** @type {import('svelte/action').Action} */
+/** @type {import('svelte/action').Action<HTMLInputElement,FlatpickrOptions,EventKey>} */
 const datePicker = (node, options) => {
     options = { ...defaultOptions, ...options };
-    const opts = modifyHooks(options, node);
-    // const optsRemoveDefault = { ...opts, defaultDate: [] }
+    const opts = modifyHooks(options);
     const instance = attachFlatpickr(node, opts);
 
     $effect(() => {
@@ -296,10 +307,10 @@ const datePicker = (node, options) => {
     });
 }
 
-/** @type {import('svelte/action').Action} */
+/** @type {import('svelte/action').Action<HTMLInputElement,FlatpickrOptions,EventKey>} */
 const monthPicker = (node, options) => {
     options = { ...defaultOptions, ...options };
-    const opts = modifyHooks(options, node);
+    const opts = modifyHooks(options);
     const monthPlugins =
         [
             monthSelectPlugin({
@@ -323,7 +334,7 @@ const monthPicker = (node, options) => {
     });
 }
 
-/** @type {import('svelte/action').Action} */
+/** @type {import('svelte/action').Action<HTMLInputElement,FlatpickrOptions,EventKey>} */
 export default function (node, options = defaultOptions) {
     if (options.isMonthPicker) {
         options = {

@@ -3,28 +3,13 @@ body {
 	scroll-behavior: smooth;
 }
 
-/* @media (min-width: 950px) {
-	.toc {
-		display: none !important;
-	}
-
-	.content {
-		width: 60vw !important;
-		margin-left: 28vw !important;
-	}
-} */
-
 @media (min-width: 950px) {
 	aside {
-		padding-left: 8vw !important;
+		padding-left: 7vw !important;
 	}
 }
 mark {
 	background-color: rgba(252, 255, 149, 1);
-}
-
-.sub-nav div:nth-child(2) {
-	display: none;
 }
 
 table {
