@@ -8,7 +8,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/kodaicoder/svelte-flatpickr-plus"
+		"url": "git+https://github.com/kodaicoder/svelte-flatpickr-plus.git"
 	},
 	"keywords": [
 		"svelte",
