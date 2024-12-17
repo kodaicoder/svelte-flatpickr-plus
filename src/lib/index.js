@@ -40,11 +40,11 @@ export async function themeChanger(themeName) {
     }
 
     // Construct the potential theme path
-    const themePath = `/node_modules/flatpickr_plus/dist/themes/`;
+    const themePath = `https://npmcdn.com/flatpickr/dist/themes/`;
 
     tc(themeName, themePath);
 }
 export function currentTheme() {
-    const themePath = `/node_modules/flatpickr_plus/dist/themes/`;
+    const themePath = `https://npmcdn.com/flatpickr/dist/themes/`;
     return getCurrentThemeName(themePath);
 }

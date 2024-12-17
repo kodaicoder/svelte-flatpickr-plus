@@ -18,6 +18,7 @@ export default async function themeChanger(
             links.forEach((link) => link.remove());
         }
         linkElement.rel = "stylesheet";
+        linkElement.type = "text/css";
         linkElement.href = pathToThemeFolder + name + ".css";
         document.head.appendChild(linkElement);
     }
