@@ -23,8 +23,10 @@ Flatpickr is a lightweight and powerful datetime picker. Svelte Flatpickr Plus i
 
 Svelte Flatpickr Plus coming with 1 powerful action and you can name it what ever you want.
 
-```javascript
-<script>import name_it_yourself from 'svelte-flatpickr-plus';</script>
+```html
+<script>
+	import your_action_name from 'svelte-flatpickr-plus';
+</script>
 ```
 
 ## Installation
@@ -41,7 +43,7 @@ you can import any actions and passing options to that actions that all you need
 
 example for build date picker element
 
-```javascript
+```html
 <script>
 	import svlatepickr from 'svelte-flatpickr-plus';
 </script>
