@@ -4,7 +4,7 @@ title: Migration from V1
 
 ### Importing
 
-I has changed from 4 actions (datePicker, monthPicker, dateRangePicker and monthRangePicker) into only 1 action that you can name it by yourself.
+Svelte-flatpickr-plus has changed from 4 actions (datePicker, monthPicker, dateRangePicker and monthRangePicker) into only 1 action that you can name it by yourself.
 
 ```svelte title=".svelte"
 <script>
@@ -76,6 +76,29 @@ With a month range picker you need to adding options object with `isMonthPicker:
 </script>
 
 <input use:svlatepickr={options} /> // [svp! ++]
+```
+
+### Fully support on `multiple` mode
+
+For now you can using multiple mode on both date picker or month picker
+
+```svelte title=".svelte"
+<script>
+	import svlatepickr from 'svelte-flatpickr-plus';
+	// For date picker
+	// [svp! ++]const optionsDatePicker ={
+	// [svp! ++]    mode: 'multiple'
+	// [svp! ++]};
+
+	//For month picker
+	// [svp! ++]const optionsMonthPicker ={
+	// [svp! ++]    isMonthPicker: true,
+	// [svp! ++]    mode: 'multiple'
+	// [svp! ++]};
+</script>
+
+<input use:svlatepickr={optionsDatePicker} /> // [svp! ++]
+<input use:svlatepickr={optionsMonthPicker} /> // [svp! ++]
 ```
 
 ### Theme Changer
