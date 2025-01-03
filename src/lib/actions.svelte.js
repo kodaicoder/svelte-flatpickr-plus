@@ -289,28 +289,20 @@ function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [yearDropd
     return fp;
 }
 
-/** @type {import('svelte/action').Action<HTMLInputElement,FlatpickrOptions,EventKey>} */
-const datePicker = (node, options) => {
-    options = { ...defaultOptions, ...options };
-    const opts = modifyHooks(options);
-    const instance = attachFlatpickr(node, opts);
-
-    $effect(() => {
-        if (opts.defaultDate) {
-            const event = new Event('input');
-            node.dispatchEvent(event);
+/** @type {import('svelte/action').Action} */
+export default function (node, options = defaultOptions) {
+    if (options.isMonthPicker) {
+        options = {
+            ...defaultMonthOptions, ...options
         }
-        return () => {
-            instance.destroy();
-            instance._input?.form?.removeEventListener('reset', (ev) => resetFlatpickr(ev, instance, opts));
-        };
-    });
-}
+    } else {
+        options = {
+            ...defaultOptions, ...options
+        }
+    }
 
-/** @type {import('svelte/action').Action<HTMLInputElement,FlatpickrOptions,EventKey>} */
-const monthPicker = (node, options) => {
-    options = { ...defaultOptions, ...options };
     const opts = modifyHooks(options);
+
     const monthPlugins =
         [
             monthSelectPlugin({
@@ -320,31 +312,17 @@ const monthPicker = (node, options) => {
             }),
             yearDropdownPlugin(),
         ]
-    const instance = attachFlatpickr(node, opts, monthPlugins);
+
+    const instance = attachFlatpickr(node, opts, options.isMonthPicker ? monthPlugins : []);
+
     $effect(() => {
         if (opts.defaultDate) {
             const event = new Event('input');
             node.dispatchEvent(event);
         }
-
         return () => {
             instance.destroy();
             instance._input?.form?.removeEventListener('reset', (ev) => resetFlatpickr(ev, instance, opts));
         };
     });
-}
-
-/** @type {import('svelte/action').Action<HTMLInputElement,FlatpickrOptions,EventKey>} */
-export default function (node, options = defaultOptions) {
-    if (options.isMonthPicker) {
-        options = {
-            ...defaultMonthOptions, ...options
-        }
-        monthPicker(node, options);
-    } else {
-        options = {
-            ...defaultOptions, ...options
-        }
-        datePicker(node, options);
-    }
 }
