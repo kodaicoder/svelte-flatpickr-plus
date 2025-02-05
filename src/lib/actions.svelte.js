@@ -289,7 +289,7 @@ function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [yearDropd
     return fp;
 }
 
-/** @type {import('svelte/action').Action} */
+/** @type {import('./types.js').FlatpickrAction} */
 export default function (node, options = defaultOptions) {
     if (options.isMonthPicker) {
         options = {

@@ -113,3 +113,8 @@ export default interface FlatpickrOptions {
 	resetMoveDefault?: boolean; // Handling reset and move to calendar to default date.
 	resetToDefault?: boolean; // Handling reset and selected a default date.
 }
+
+export type FlatpickrAction<Node extends HTMLElement> = (
+	node: Node,
+	parameter?: FlatpickrOptions
+) => void | import('svelte/action').ActionReturn<FlatpickrOptions | undefined, any>;
