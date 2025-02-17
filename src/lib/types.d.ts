@@ -114,6 +114,8 @@ export default interface FlatpickrOptions {
 	resetToDefault?: boolean; // Handling reset and selected a default date.
 }
 
+export type FlatpickrOptions = Partial<FlatpickrOptions>;
+
 export type FlatpickrAction<Node extends HTMLElement> = (
 	node: Node,
 	parameter?: FlatpickrOptions
