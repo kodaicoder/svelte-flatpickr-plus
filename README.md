@@ -10,7 +10,7 @@ Flatpickr is a lightweight and powerful datetime picker. Svelte Flatpickr Plus i
 
 ### Feature overview:
 
-[Demo here](https://external.ink?to=https://svelte-flatpickr-plus.vercel.app/guide/basic-usage/date-picker)
+[Demo here](https://svelte-flatpickr-plus.vercel.app/guide/basic-usage/date-picker)
 
 - all features of Flatpickr
 - Svelte Flatpickr Plus is just a svelte actions that you can using with use:action directive of svelte on input element with any class or style
