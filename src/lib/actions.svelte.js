@@ -228,8 +228,11 @@ function resetFlatpickr(event, fp, opts) {
  * @param {[*]} plugins 
  * @returns 
  */
-function attachFlatpickr(node, opts, plugins = opts.noCalendar ? [] : [yearDropdownPlugin()]) {
+function attachFlatpickr(node, opts, plugins = []) {
     node.setAttribute('autocomplete', 'off');
+    if (!opts.noCalendar) {
+        plugins.push(yearDropdownPlugin());
+    }
     if (!opts.allowInput) {
         node.setAttribute('readonly', 'true');
     }
