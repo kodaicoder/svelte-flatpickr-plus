@@ -312,8 +312,7 @@ export default function (node, options = defaultOptions) {
                 shorthand: options.shorthand, //defaults to false
                 dateFormat: options.dateFormat, //defaults to "F Y"
                 altFormat: options.altFormat //defaults to "F Y"
-            }),
-            yearDropdownPlugin(),
+            })
         ]
 
     const instance = attachFlatpickr(node, opts, options.isMonthPicker ? monthPlugins : []);
