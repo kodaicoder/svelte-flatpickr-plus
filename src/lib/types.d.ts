@@ -62,6 +62,7 @@ export default interface FlatpickrOptions {
 	ignoredFocusElements?: HTMLElement[]; // Elements that will not close the calendar when clicked.
 	inline?: boolean; // Displays the calendar inline.
 	isMonthPicker?: boolean; // Whether the calendar is a month picker.
+	isYearPicker?: boolean; // Whether the calendar is a year picker.
 	locale?: any | Partial<any>; // The locale, either as a string or as an object.
 	maxDate?: DateOption; // The maximum date that a user can pick.
 	maxTime?: DateOption; // The maximum time that a user can pick.
