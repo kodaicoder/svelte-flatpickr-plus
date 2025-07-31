@@ -79,6 +79,7 @@ import 'flatpickr_plus/dist/plugins/monthSelect/style.css';
  * @property {HTMLElement[]} [ignoredFocusElements] - By default, clicking anywhere outside of the calendar/input will close the calendar. Clicking on elements specified in this option will not close the calendar.
  * @property {boolean} [inline] - Displays the calendar inline.
  * @property {boolean} [isMonthPicker] - Whether the calendar is a month picker.
+ * @property {boolean} [isYearPicker] - Whether the calendar is a year picker.
  * @property {any | Partial<any>} [locale] - The locale, either as a string (e.g., "ru", "en") or as an object. See https://chmln.github.io/flatpickr/localization/
  * @property {DateOption} [maxDate] - The maximum date that a user can pick (inclusive).
  * @property {DateOption} [maxTime] - The maximum time that a user can pick (inclusive).
@@ -123,79 +124,88 @@ const endDayOfNextYear = new Date(new Date().getFullYear() + 1, 11, 31);
 
 /** @type {FlatpickrOptions} */
 const defaultOptions = {
-    allowInput: false,
-    allowInvalidPreload: false,
-    altFormat: "F j, Y",
-    altInput: false,
-    altInputClass: "",
-    ariaDateFormat: "F j, Y",
-    autoFillDefaultTime: true,
-    clickOpens: true,
-    closeOnSelect: true,
-    conjunction: ", ",
-    dateFormat: "Y-m-d",
-    defaultHour: 12,
-    defaultMinute: 0,
-    defaultSeconds: 0,
-    disable: [],
-    disableMobile: true,
-    enableSeconds: false,
-    enableTime: false,
-    hourIncrement: 1,
-    ignoredFocusElements: [],
-    inline: false,
-    isMonthPicker: false,
-    locale: "default",
-    maxDate: endDayOfNextYear,
-    minuteIncrement: 5,
-    mode: "single",
-    monthSelectorType: "dropdown",
-    noCalendar: false,
-    now: new Date(),
-    onChange: [],
-    onClose: [],
-    onDayCreate: [],
-    onDestroy: [],
-    onKeyDown: [],
-    onMonthChange: [],
-    onOpen: [],
-    onParseConfig: [],
-    onReady: [],
-    onValueUpdate: [],
-    onYearChange: [],
-    onPreCalendarPosition: [],
-    plugins: [],
-    position: "auto",
-    positionElement: undefined,
-    shorthandCurrentMonth: false,
-    shorthand: false,
-    showMonths: 1,
-    static: false,
-    time_24hr: false,
-    weekNumbers: false,
-    wrap: false,
-    useLocaleYear: false,
-    resetMoveDefault: true,
-    resetToDefault: true,
+	allowInput: false,
+	allowInvalidPreload: false,
+	altFormat: "F j, Y",
+	altInput: false,
+	altInputClass: "",
+	ariaDateFormat: "F j, Y",
+	autoFillDefaultTime: true,
+	clickOpens: true,
+	closeOnSelect: true,
+	conjunction: ", ",
+	dateFormat: "Y-m-d",
+	defaultHour: 12,
+	defaultMinute: 0,
+	defaultSeconds: 0,
+	disable: [],
+	disableMobile: true,
+	enableSeconds: false,
+	enableTime: false,
+	hourIncrement: 1,
+	ignoredFocusElements: [],
+	inline: false,
+	isMonthPicker: false,
+	isYearPicker: false,
+	locale: "default",
+	maxDate: endDayOfNextYear,
+	minuteIncrement: 5,
+	mode: "single",
+	monthSelectorType: "dropdown",
+	noCalendar: false,
+	now: new Date(),
+	onChange: [],
+	onClose: [],
+	onDayCreate: [],
+	onDestroy: [],
+	onKeyDown: [],
+	onMonthChange: [],
+	onOpen: [],
+	onParseConfig: [],
+	onReady: [],
+	onValueUpdate: [],
+	onYearChange: [],
+	onPreCalendarPosition: [],
+	plugins: [],
+	position: "auto",
+	positionElement: undefined,
+	shorthandCurrentMonth: false,
+	shorthand: false,
+	showMonths: 1,
+	static: false,
+	time_24hr: false,
+	weekNumbers: false,
+	wrap: false,
+	useLocaleYear: false,
+	resetMoveDefault: true,
+	resetToDefault: true,
 };
 /** @type {FlatpickrOptions} */
 const defaultMonthOptions = {
-    ...defaultOptions,
-    altFormat: 'F Y',
-    ariaDateFormat: 'F Y',
-    dateFormat: 'F Y'
+	...defaultOptions,
+	altFormat: 'F Y',
+	ariaDateFormat: 'F Y',
+	dateFormat: 'F Y'
+}
+
+/** @type {FlatpickrOptions} */
+const defaultYearOptions = {
+	...defaultOptions,
+	altFormat: 'Y',
+	ariaDateFormat: 'Y',
+	dateFormat: 'Y'
 }
 
 /** @type {HookKey[]} */
 const hooks = [
-    'onChange',
-    'onMonthChange',
-    'onYearChange',
-    'onReady',
-    'onOpen',
-    'onDayCreate',
-    'onClose',
-    'onValueUpdate'
+	'onChange',
+	'onMonthChange',
+	'onYearChange',
+	'onReady',
+	'onOpen',
+	'onDayCreate',
+	'onClose',
+	'onValueUpdate'
 ];
 
 /**
@@ -203,11 +213,11 @@ const hooks = [
  * @returns {FlatpickrOptions}
  */
 function modifyHooks(opts = {}) {
-    opts = Object.assign({}, opts);
-    for (const hook of hooks) {
-        if (!Array.isArray(opts[hook])) opts[hook] = [opts[hook]];
-    }
-    return opts;
+	opts = Object.assign({}, opts);
+	for (const hook of hooks) {
+		if (!Array.isArray(opts[hook])) opts[hook] = [opts[hook]];
+	}
+	return opts;
 }
 
 /**
@@ -216,9 +226,9 @@ function modifyHooks(opts = {}) {
  * @param {FlatpickrOptions} opts
  */
 function resetFlatpickr(event, fp, opts) {
-    fp.clear();
-    if (opts.defaultDate && opts.resetToDefault)
-        event.preventDefault();
+	fp.clear();
+	if (opts.defaultDate && opts.resetToDefault)
+		event.preventDefault();
 }
 
 /**
@@ -228,103 +238,124 @@ function resetFlatpickr(event, fp, opts) {
  * @param {[*]} plugins 
  * @returns 
  */
-function attachFlatpickr(node, opts, plugins = []) {
-    node.setAttribute('autocomplete', 'off');
-    if (!opts.noCalendar) {
-        plugins.push(yearDropdownPlugin());
-    }
-    if (!opts.allowInput) {
-        node.setAttribute('readonly', 'true');
-    }
-    /** @type {import('flatpickr_plus').flatpickr.Instance} */
-    const fp = flatpickr(node, {
-        ...opts,
-        onOpen: [
-            async function (selectedDates, dateStr, instance) {
-                if (!opts.allowInput) {
-                    if (instance.altInput) {
-                        const dayElement = await instance.days;
-                        if (dayElement) {
-                            if (dayElement.querySelector('.today')) {
-                                /** @type {HTMLElement} */
-                                (dayElement.querySelector('.today'))?.focus();
-                            } else {
-                                /** @type {HTMLElement} */
-                                (dayElement.querySelector('.selected'))?.focus();
-                            }
-                        }
-                    } else {
-                        const dayElement = await instance.days;
-                        if (dayElement) {
-                            if (dayElement.querySelector('.today')) {
-                                /** @type {HTMLElement} */
-                                (dayElement.querySelector('.today'))?.focus();
-                            } else {
-                                /** @type {HTMLElement} */
-                                (dayElement.querySelector('.selected'))?.focus();
-                            }
-                            return
-                        }
-                        instance.hourElement?.focus()
-                    }
-                }
-            },
-            ...opts.onOpen
-        ],
-        onClose: [
-            function (selectedDates, dateStr, instance) {
-                if (instance.altInput) {
-                    instance.altInput.blur();
-                } else {
-                    instance.input.blur();
-                }
-            },
-            ...opts.onClose
-        ],
-        plugins: plugins
-    });
+export function createFlatpickr(node, opts = defaultOptions) {
+	if (opts.isMonthPicker) {
+		opts = {
+			...defaultMonthOptions, ...opts
+		}
+	}
+	else if (opts.isYearPicker) {
+		opts = {
+			...defaultYearOptions, ...opts
+		}
+	}
+	else {
+		opts = {
+			...defaultOptions, ...opts
+		}
+	}
 
-    if (opts.wrap)
-        node.querySelector('input').form?.addEventListener('reset', (ev) => resetFlatpickr(ev, fp, opts));
-    else
-        node.form?.addEventListener('reset', (ev) => resetFlatpickr(ev, fp, opts));
+	opts = modifyHooks(opts);
+	const plugins = [];
 
-    return fp;
+	node.setAttribute('autocomplete', 'off');
+	if (opts.isMonthPicker) {
+		plugins.push(monthSelectPlugin({
+			shorthand: opts.shorthand, //defaults to false
+			dateFormat: opts.dateFormat, //defaults to "F Y"
+			altFormat: opts.altFormat //defaults to "F Y"
+		}));
+	} else if (opts.isYearPicker) {
+		plugins.push(monthSelectPlugin({
+			shorthand: opts.shorthand, //defaults to false
+			dateFormat: opts.dateFormat, //defaults to "Y"
+			altFormat: opts.altFormat, //defaults to "Y"
+			yearPicker: true, //defaults to false
+		}));
+
+		opts = {
+			...opts,
+			onYearChange: [
+				async function (selectedDates, dateStr, instance) {
+					console.log('onYearChange', selectedDates);
+				},
+				...opts.onYearChange
+			]
+		}
+	}
+	if (!opts.noCalendar) {
+		plugins.push(yearDropdownPlugin());
+	}
+	if (!opts.allowInput) {
+		node.setAttribute('readonly', 'true');
+	}
+	/** @type {import('./types.d.ts').FlatpickrInstance} */
+	const fp = flatpickr(node, {
+		...opts,
+		onOpen: [
+			async function (selectedDates, dateStr, instance) {
+				if (!opts.allowInput) {
+					if (instance.altInput) {
+						const dayElement = await instance.days;
+						if (dayElement) {
+							if (dayElement.querySelector('.today')) {
+								/** @type {HTMLElement} */
+								(dayElement.querySelector('.today'))?.focus();
+							} else {
+								/** @type {HTMLElement} */
+								(dayElement.querySelector('.selected'))?.focus();
+							}
+						}
+					} else {
+						const dayElement = await instance.days;
+						if (dayElement) {
+							if (dayElement.querySelector('.today')) {
+								/** @type {HTMLElement} */
+								(dayElement.querySelector('.today'))?.focus();
+							} else {
+								/** @type {HTMLElement} */
+								(dayElement.querySelector('.selected'))?.focus();
+							}
+							return
+						}
+						instance.hourElement?.focus()
+					}
+				}
+			},
+			...opts.onOpen
+		],
+		onClose: [
+			function (selectedDates, dateStr, instance) {
+				if (instance.altInput) {
+					instance.altInput.blur();
+				} else {
+					instance.input.blur();
+				}
+			},
+			...opts.onClose
+		],
+		plugins: plugins
+	});
+
+	if (opts.wrap)
+		node.querySelector('input').form?.addEventListener('reset', (ev) => resetFlatpickr(ev, fp, opts));
+	else
+		node.form?.addEventListener('reset', (ev) => resetFlatpickr(ev, fp, opts));
+
+	return fp;
 }
 
-/** @type {import('./types.js').FlatpickrAction} */
+/** @type {import('./types.d.ts').FlatpickrAction} */
 export default function (node, options = defaultOptions) {
-    if (options.isMonthPicker) {
-        options = {
-            ...defaultMonthOptions, ...options
-        }
-    } else {
-        options = {
-            ...defaultOptions, ...options
-        }
-    }
-
-    const opts = modifyHooks(options);
-
-    const monthPlugins =
-        [
-            monthSelectPlugin({
-                shorthand: options.shorthand, //defaults to false
-                dateFormat: options.dateFormat, //defaults to "F Y"
-                altFormat: options.altFormat //defaults to "F Y"
-            })
-        ]
-
-    const instance = attachFlatpickr(node, opts, options.isMonthPicker ? monthPlugins : []);
-
-    $effect(() => {
-        if (opts.defaultDate) {
-            const event = new Event('input');
-            node.dispatchEvent(event);
-        }
-        return () => {
-            instance.destroy();
-            instance._input?.form?.removeEventListener('reset', (ev) => resetFlatpickr(ev, instance, opts));
-        };
-    });
+	const instance = createFlatpickr(node, options);
+	$effect(() => {
+		if (options.defaultDate) {
+			const event = new Event('input');
+			node.dispatchEvent(event);
+		}
+		return () => {
+			instance.destroy();
+			instance._input?.form?.removeEventListener('reset', (ev) => resetFlatpickr(ev, instance, opts));
+		};
+	});
 }

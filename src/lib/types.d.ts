@@ -1,4 +1,5 @@
 // types.ts
+import type flatpickr from 'flatpickr_plus';
 
 // Represents a date option that can be either a Date object, a string, or a number.
 type DateOption = Date | string | number;
@@ -120,3 +121,5 @@ export type FlatpickrAction<Node extends HTMLElement> = (
 	node: Node,
 	parameter?: FlatpickrOptions
 ) => void | import('svelte/action').ActionReturn<FlatpickrOptions | undefined, any>;
+
+export type FlatpickrInstance = flatpickr.Instance;

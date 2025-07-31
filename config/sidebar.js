@@ -53,6 +53,10 @@ export default {
                     title: 'Month range picker',
                     to: '/guide/basic-usage/month-range-picker/',
                 },
+                {
+                    title: 'Year picker',
+                    to: '/guide/basic-usage/year-picker/',
+                },
             ],
         },
         {

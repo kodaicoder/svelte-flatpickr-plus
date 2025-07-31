@@ -1,7 +1,8 @@
 export { default as default } from './actions.svelte.js';
+export { createFlatpickr as attachFlatpickr } from './actions.svelte.js';
 export { default as l10n } from 'flatpickr_plus/dist/l10n';
 import { default as tc, getCurrentThemeName } from './themeChanger.js';
-export type { DateLimit, DateOption, Hook, FlatpickrOptions } from './types.js';
+export type { DateLimit, DateOption, Hook, FlatpickrOptions, FlatpickrInstance } from './types.js';
 
 /**
  * Enum-like object defining available theme names
