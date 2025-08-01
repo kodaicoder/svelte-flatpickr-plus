@@ -52,7 +52,6 @@
 		"!dist/**/*.spec.*"
 	],
 	"peerDependencies": {
-		"flatpickr_plus": "^1.2.0",
 		"svelte": "^5.0.0"
 	},
 	"devDependencies": {
@@ -79,7 +78,7 @@
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
-		"flatpickr_plus": "^1.2.1",
+		"flatpickr_plus": "^1.2.0",
 		"postcss": "^8.5.3",
 		"postcss-import": "^16.1.0",
 		"svelte-preprocess": "^6.0.3"
