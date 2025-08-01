@@ -1,6 +1,6 @@
 {
 	"name": "svelte-flatpickr-plus",
-	"version": "2.1.1",
+	"version": "2.1.2",
 	"description": "Flatpickr is a lightweight and powerful datetime picker. Svelte Flatpickr Plus is a wrapper for Flatpickr with some extra features.",
 	"homepage": "https://svelte-flatpickr-plus.vercel.app/",
 	"bugs": {
@@ -52,7 +52,7 @@
 		"!dist/**/*.spec.*"
 	],
 	"peerDependencies": {
-		"flatpickr_plus": "^1.0.0",
+		"flatpickr_plus": "^1.2.0",
 		"svelte": "^5.0.0"
 	},
 	"devDependencies": {
